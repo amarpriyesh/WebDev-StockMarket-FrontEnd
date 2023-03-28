@@ -11,7 +11,8 @@ function Navigation() {
         <div>
             <Link to="/">Home</Link>
             {!currentUser && <Link to="/login">|Login</Link>}
-            {currentUser && <Link to="/profile">|Profile</Link>}
+            {currentUser && <Link to="/profile">|Profile|</Link>}
+            {currentUser && currentUser.username}
             {currentUser && <button
                 onClick={() => {
                     dispatch(logoutThunk());

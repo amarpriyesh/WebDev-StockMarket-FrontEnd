@@ -77,7 +77,6 @@ function Profile() {
             <div className="row">
                 <div className="col-md-6">
                     <h3>Personal Information</h3>
-                    {JSON.stringify(currentUser)}
                     {currentUser && (
                         <div>
                             <h1>Welcome {currentUser.username}</h1>
