@@ -38,11 +38,7 @@ function Home() {
                             ))}
                         </ul>
                     ) : (
-                        <p>No activity to show
-                        <Link to="/profile" className="btn btn-primary">
-                            Profile
-                        </Link>
-                        </p>
+                        <p>No activity to show</p>
                     )}
                 </div>
             ) : (

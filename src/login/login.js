@@ -13,7 +13,7 @@ function LoginScreen() {
 
     const handleLogin = async () => {
         dispatch(loginThunk({ username, password }));
-        navigate("/profile");
+        navigate("/");
     };
     return (
         <div className="container">

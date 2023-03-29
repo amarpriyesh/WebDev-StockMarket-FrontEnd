@@ -72,9 +72,9 @@ function Profile() {
         dispatch(profileThunk());
     }, []);
     console.log(currentUser);
-    // if (!currentUser) {
-    //     return <Navigate to="/login" />;
-    // }
+    if (!currentUser) {
+        return <Navigate to="/login" />;
+    }
     return (
         <div className="container">
             <h2>Profile</h2>
