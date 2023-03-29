@@ -1,8 +1,7 @@
 import React, {useEffect} from 'react';
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router";
-import {logoutThunk, profileThunk} from "../services/user-thunks";
+import {profileThunk} from "../services/user-thunks";
 
 function Profile() {
     // const { profileId } = useParams();
@@ -67,7 +66,6 @@ function Profile() {
     // );
     const { currentUser } = useSelector((state) => state.user);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     useEffect(() => {
         dispatch(profileThunk());
     }, []);
@@ -85,15 +83,15 @@ function Profile() {
                     <Link to="/search" className="btn btn-primary">
                         Search Results
                     </Link>
-                    <button
-                        onClick={() => {
-                            dispatch(logoutThunk());
-                            navigate("/login");
-                        }}
-                        className="btn btn-danger">
-                        Logout
-                    </button>
                 </div>
+            </div>
+            <div className="flex">
+                <span className="flex-row-fill">
+                    Following
+                </span>
+                <span className="flex-row-fill">
+                    Following
+                </span>
             </div>
         </div>
     );
