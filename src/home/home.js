@@ -1,14 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
+import {profileThunk} from "../services/user-thunks";
+import {useDispatch} from "react-redux";
 
 
 function Home() {
     const [latestData, setLatestData] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userData, setUserData] = useState([]);
-
+    const dispatch = useDispatch();
     useEffect(() => {
-        fetchData().then(r => console.log(r));
+        dispatch(profileThunk());
     }, []);
 
     const fetchData = async () => {

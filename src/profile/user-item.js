@@ -1,11 +1,19 @@
+import {useDispatch} from "react-redux";
+import {deleteUserThunk} from "../services/user-thunks";
+
 const UserItem = ({user}) => {
+    const dispatch = useDispatch();
+    const deleteUserHandler = (id) => {
+        dispatch(deleteUserThunk(id));
+    }
     return(
         <li className="list-group-item">
             <div className="row">
-                <div className="col-10">
-                    <div>
-                        <span className="fw-bolder">{user.username}</span>&nbsp;
-                        {user.role}</div>
+                <div className="col-12">
+                        <span className="">{user.username}</span>&nbsp;
+                        {user.role}
+                        <span className="btn btn-primary float-right"
+                        onClick={() => deleteUserHandler(user._id)}>Delete</span>
                 </div>
             </div>
         </li>

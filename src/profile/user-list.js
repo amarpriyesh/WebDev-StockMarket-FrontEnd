@@ -8,7 +8,7 @@ const UserList = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(findAllUsersThunk())
-    }, [])
+    }, [allUsers])
 
     return(
         <ul className="list-group">

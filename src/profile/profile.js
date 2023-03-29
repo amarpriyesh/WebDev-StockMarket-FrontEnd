@@ -70,11 +70,8 @@ function Profile() {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(profileThunk());
+        dispatch(findAllUsersThunk());
     }, []);
-    console.log(currentUser);
-    if (!currentUser) {
-        return <Navigate to="/login" />;
-    }
     return (
         <div className="container">
             <h2>Profile</h2>
