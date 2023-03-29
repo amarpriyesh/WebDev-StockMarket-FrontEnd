@@ -1,7 +1,9 @@
 import React, {useEffect} from 'react';
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {profileThunk} from "../services/user-thunks";
+import {findAllUsersThunk, profileThunk} from "../services/user-thunks";
+import UserItem from "./user-item";
+import UserList from "./user-list";
 
 function Profile() {
     // const { profileId } = useParams();
@@ -69,6 +71,10 @@ function Profile() {
     useEffect(() => {
         dispatch(profileThunk());
     }, []);
+    console.log(currentUser);
+    // if (!currentUser) {
+    //     return <Navigate to="/login" />;
+    // }
     return (
         <div className="container">
             <h2>Profile</h2>
@@ -85,14 +91,13 @@ function Profile() {
                     </Link>
                 </div>
             </div>
-            <div className="flex">
-                <span className="flex-row-fill">
-                    Following
-                </span>
-                <span className="flex-row-fill">
-                    Following
-                </span>
-            </div>
+                {currentUser && currentUser.role==="ADMIN" && (
+                   <div>
+                       Admin View
+                       <UserList/>
+                   </div>
+                )
+                    }
         </div>
     );
 }
