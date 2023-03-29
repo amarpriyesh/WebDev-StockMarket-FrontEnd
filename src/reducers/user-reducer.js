@@ -24,7 +24,7 @@ const userSlice = createSlice({
             state.currentUser = payload;
         },
         [registerThunk.fulfilled]: (state, { payload }) => {
-            state.currentUser = payload;
+            state.currentUser = null;
         },
         [findAllUsersThunk.fulfilled]: (state,{payload}) => {
             state.allUsers = payload;

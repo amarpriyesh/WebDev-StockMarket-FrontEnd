@@ -9,6 +9,7 @@ function Navigation() {
         <div>
             <Link to="/">Home</Link>
             {!currentUser && <Link to="/login">|Login</Link>}
+            {!currentUser && <Link to="/register">|Register</Link>}
             {currentUser && <Link to="/profile">|Profile</Link>}
             {currentUser && <Link to="/login"
                 onClick={() => {

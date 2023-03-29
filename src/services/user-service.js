@@ -40,10 +40,13 @@ export const profile = async () => {
     return response.data;
 };
 
-export const register = async (username, password) => {
-    const response = await axios.post(`${USERS_URL}/register`, {
+export const register = async ({username,password, firstName, lastName, age}) => {
+    const response = await axios.post(`${USERS_URL}/register`,{
         username,
         password,
+        firstName,
+        lastName,
+        age
     });
     return response.data;
 };

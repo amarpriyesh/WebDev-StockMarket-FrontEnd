@@ -8,6 +8,7 @@ import LoginScreen from "./login/login";
 import {Provider} from "react-redux";
 import store from "./reducers/store";
 import Navigation from "./components/navigation";
+import RegisterScreen from "./register/register";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
                   <Route path="/search" element={<SearchResults/>} />
                   <Route path="/details/:id" element={<Details/>} />
                   <Route path="/login" element={<LoginScreen />} />
+                  <Route path="/register" element={<RegisterScreen />} />
               </Routes>
             </Router>
         </div>
