@@ -1,11 +1,16 @@
 import React from 'react';
+
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Home from './home/home';
 import Profile from "./profile/profile";
 import SearchResults from "./search/searchResults";
 import Details from "./details/details";
+import NewsComponent from "./news/news"
+
+
 
 function App() {
+
   return (
       <Router>
         <div className="App">
@@ -17,6 +22,7 @@ function App() {
               <Route path="/search/:searchCriteria" element={<SearchResults/>} />
               <Route path="/search" element={<SearchResults/>} />
               <Route path="/details/:id" element={<Details/>} />
+              <Route path="/news" element={<NewsComponent/>} />
             </Routes>
         </div>
       </Router>
