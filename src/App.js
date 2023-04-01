@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Home from './home/home';
 import Profile from "./profile/profile";
@@ -9,11 +10,15 @@ import {Provider} from "react-redux";
 import store from "./reducers/store";
 import Navigation from "./components/navigation";
 import RegisterScreen from "./register/register";
+import NewsComponent from "./news/news"
+
+
 
 function App() {
+
   return (
       <Provider store={store}>
-        <div className="container">
+        <div className="App">
             <Router>
                 <Navigation/>
               <Routes>
@@ -26,6 +31,7 @@ function App() {
                   <Route path="/details/:id" element={<Details/>} />
                   <Route path="/login" element={<LoginScreen />} />
                   <Route path="/register" element={<RegisterScreen />} />
+                  <Route path="/news" element={<NewsComponent/>} />
               </Routes>
             </Router>
         </div>
