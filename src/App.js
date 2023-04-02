@@ -11,6 +11,7 @@ import store from "./reducers/store";
 import Navigation from "./components/navigation";
 import RegisterScreen from "./register/register";
 import NewsComponent from "./news/news"
+import NavigationSidebar from "./navigation";
 
 
 
@@ -20,7 +21,13 @@ function App() {
       <Provider store={store}>
         <div className="App">
             <Router>
-                <Navigation/>
+                <div className="row m-1 ">
+                    <div className="col-2">
+                        <NavigationSidebar active="news"/>
+                    </div>
+
+                    <div className="col-8 "
+                         >
               <Routes>
                   <Route exact path="/" element={<Home/>}/>
                   <Route exact path="/home" element={<Home/>}/>
@@ -33,6 +40,24 @@ function App() {
                   <Route path="/register" element={<RegisterScreen />} />
                   <Route path="/news" element={<NewsComponent/>} />
               </Routes>
+                    </div>
+                    <div className="col-2">
+                    <div className="  rounded border list-group">
+
+                        <div className="list-group-item bg-light">
+                            Sample
+                        </div>
+                        <div className="list-group-item bg-light">
+                            Sample
+                        </div>
+                        <div className="list-group-item bg-light">
+                            Sample
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+
             </Router>
         </div>
       </Provider>

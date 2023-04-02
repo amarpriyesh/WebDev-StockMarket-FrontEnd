@@ -15,18 +15,43 @@ const NewsItem = ({news = {"description"
 }}) => {
 
     return(
-        <>
-    <div className="row pt-2 pb-2" style={{"border": "1px solid #343a40"}}>
+
+            <li className="list-group-item mt-1 mb-1 rounded bg-light">
+    <div className="row" >
+
         <div className="col-2">
-            <img className="float-start" src={news.image} height={100} width={100}/>
-        </div>
-        <div className="col-10">
-            <div>{news.title}</div>
-            <div>{news.description}</div>
+
+            <img  src={news.image} height={120} width={120}/>
+<div>
+            <span>Symbol:</span> <span className="fw-bold"> {news.symbol}
+               </span>
+</div>
         </div>
 
-    </div>
-    </>
+
+        <div className="col-10">
+            <div className="row">
+                <div className="col-3">
+                    <span className="align-content-left fw-bolder fs-5"> {news.company}</span>
+                </div>
+                <div className="col-6 text-center">
+                    <span >{news.industry}</span>         </div>
+                <div className="col-3">
+                    <span className="float-end">{new Date(news.time).toLocaleString()}</span>
+
+                </div>
+            </div>
+            @{news.source}
+            <div className="row">
+            <div className="fw-bold col-10">{news.title}</div>
+
+            <input style={{"width": "120px"}} type="range" className="form-range float-end col-2" min="-1" max="1" id="customRange3"  value={news.sentiment}  width={120}/>
+            </div>
+            <div>{news.description}</div>
+        </div>
+        </div>
+            </li>
+
     )
 }
 
