@@ -3,7 +3,7 @@ import {w3cwebsocket as W3CWebSocket} from "websocket"
 import React from "react";
 import {useState,useEffect} from "react";
 import {findAllNews} from "../services/news-service"
-const client = new W3CWebSocket('ws://127.0.0.1:8000');
+const client = new W3CWebSocket('ws://stockmarket-y69s.onrender.com:8000');
 
 
 
