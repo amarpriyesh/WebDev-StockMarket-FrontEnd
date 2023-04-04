@@ -1,6 +1,10 @@
 import axios from "axios";
-const BASE_URL = "http://localhost:4000/api";
-const NEWS_URL = `${BASE_URL}/news`;
+/*import dotenv from 'dotenv'
+
+dotenv.config()*/
+
+const BASE_URL1 = process.env.REACT_APP_API_URL
+const NEWS_URL = `${BASE_URL1}/news`;
 console.log("NEWS_URL", NEWS_URL);
 
 export const findAllNews = async () => {
