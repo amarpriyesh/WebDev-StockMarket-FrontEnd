@@ -24,10 +24,11 @@ function RegisterScreen() {
             registerThunk({ username, password, firstName, lastName, age, email })
         );
         if (response.error) {
-            setError(response.error);
+            setError("Email already exists");
         } else {
             navigate("/login");
         }
+
     };
 
     return (
@@ -35,7 +36,7 @@ function RegisterScreen() {
             <h1>Register Screen</h1>
             {error && (
                 <div className="alert alert-danger" role="alert">
-                    {error}
+                    <pre>{error}</pre>
                 </div>
             )}
             <div>
