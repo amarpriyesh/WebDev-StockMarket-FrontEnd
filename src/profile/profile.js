@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react';
 import {Link, Navigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {findAllUsersThunk, profileThunk} from "../services/user-thunks";
+import {findAllUsersThunk, logoutThunk, profileThunk} from "../services/user-thunks";
 import UserItem from "./user-item";
 import UserList from "./user-list";
+import {useNavigate} from "react-router";
 
 function Profile() {
     // const { profileId } = useParams();
@@ -68,6 +69,7 @@ function Profile() {
     // );
     const { currentUser } = useSelector((state) => state.user);
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     useEffect(() => {
         dispatch(profileThunk());
         dispatch(findAllUsersThunk());
@@ -75,6 +77,12 @@ function Profile() {
     return (
         <div className="container">
             <h2>Profile</h2>
+            <button onClick={() => {
+                dispatch(logoutThunk());
+                navigate("/login")
+            }} className="float-end btn btn-primary">
+                Logout
+            </button>
             <div className="row">
                 <div className="col-md-6">
                     <h3>Personal Information</h3>

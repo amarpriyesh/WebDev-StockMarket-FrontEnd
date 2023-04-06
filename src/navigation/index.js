@@ -2,9 +2,11 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {useLocation} from "react-router";
 import  "./index.css"
+import {useSelector} from "react-redux";
 const NavigationSidebar = (
 
 ) => {
+    const { currentUser } = useSelector((state) => state.user);
     const {pathname} = useLocation();
     const paths = pathname.split('/')
     const active = paths[2];
@@ -23,15 +25,21 @@ const NavigationSidebar = (
                 <Link to="/search" className={`list-group-item bg-light ${active === 'search'?'active':''}`}>
                     <i className="fa fa-hashtag"></i>   Search
                 </Link>
+                {currentUser &&(
                 <Link to="/profile" className={`list-group-item bg-light ${active === 'profile'?'active':''}`}>
                     <i className="fa fa-laptop"></i> Profile
                 </Link>
+                )}
+                {!currentUser &&(
                 <Link to="/login" className={`list-group-item bg-light ${active === 'login'?'active':''}`}>
                     <i className="fa fa-laptop"></i> Login
                 </Link>
+                )}
+                {!currentUser &&(
                 <Link to="/register" className={`list-group-item bg-light rounded ${active === 'register'?'active':''}`}>
                     <i className="fa fa-laptop"></i> Register
                 </Link>
+                )}
 
                 <div className="row pt-2 pe-2 ">
                     <button type="button"
