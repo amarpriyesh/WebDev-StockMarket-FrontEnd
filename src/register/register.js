@@ -11,6 +11,7 @@ function RegisterScreen() {
     const [lastName, setLastName] = useState("");
     const [age, setAge] = useState("");
     const [error, setError] = useState("");
+    const [email, setEmail] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -20,13 +21,14 @@ function RegisterScreen() {
             return;
         }
         const response = await dispatch(
-            registerThunk({ username, password, firstName, lastName, age })
+            registerThunk({ username, password, firstName, lastName, age, email })
         );
         if (response.error) {
-            setError(response.error);
+            setError("Email already exists");
         } else {
             navigate("/login");
         }
+
     };
 
     return (
@@ -34,7 +36,7 @@ function RegisterScreen() {
             <h1>Register Screen</h1>
             {error && (
                 <div className="alert alert-danger" role="alert">
-                    {error}
+                    <pre>{error}</pre>
                 </div>
             )}
             <div>
@@ -57,6 +59,17 @@ function RegisterScreen() {
                     type="text"
                     value={lastName}
                     onChange={(event) => setLastName(event.target.value)}
+                />
+            </div>
+            <div>
+                <label htmlFor="email">Email</label>
+                <br/>
+                <input
+                    id="email"
+                    className="form-control"
+                    type="text"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
                 />
             </div>
             <div>

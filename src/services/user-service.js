@@ -2,28 +2,28 @@ import axios from "axios";
 
 const USERS_URL = "http://localhost:4000/api/users";
 
-export const findAllUsers = async () => {
-    const response = await axios.get(USERS_URL);
-    return response.data;
-};
+const api = axios.create({
+    withCredentials: true,
+});
 
-export const createUser = async (user) => {
-    const response = await axios.post(USERS_URL, user);
+
+export const findAllUsers = async () => {
+    const response = await api.get(USERS_URL);
     return response.data;
 };
 
 export const deleteUser = async (userId) => {
-    const response = await axios.delete(`${USERS_URL}/${userId}`);
+    const response = await api.delete(`${USERS_URL}/${userId}`);
     return response.data;
 };
 
 export const updateUser = async (user) => {
-    const response = await axios.put(`${USERS_URL}/${user._id}`, user);
+    const response = await api.put(`${USERS_URL}/${user._id}`, user);
     return response.data;
 };
 
 export const login = async ({ username, password }) => {
-    const response = await axios.post(`${USERS_URL}/login`, {
+    const response = await api.post(`${USERS_URL}/login`, {
         username,
         password,
     });
@@ -31,22 +31,23 @@ export const login = async ({ username, password }) => {
 };
 
 export const logout = async () => {
-    const response = await axios.post(`${USERS_URL}/logout`);
+    const response = await api.post(`${USERS_URL}/logout`);
     return response.data;
 };
 
 export const profile = async () => {
-    const response = await axios.post(`${USERS_URL}/profile`);
+    const response = await api.post(`${USERS_URL}/profile`);
     return response.data;
 };
 
-export const register = async ({username,password, firstName, lastName, age}) => {
-    const response = await axios.post(`${USERS_URL}/register`,{
+export const register = async ({username,password, firstName, lastName, age, email}) => {
+    const response = await api.post(`${USERS_URL}/register`,{
         username,
         password,
         firstName,
         lastName,
-        age
+        age,
+        email
     });
     return response.data;
 };
