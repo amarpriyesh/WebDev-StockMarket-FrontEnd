@@ -1,5 +1,5 @@
 import {useDispatch} from "react-redux";
-import {deleteUserThunk} from "../services/user-thunks";
+import {deleteUserThunk} from "../thunks/user-thunks";
 
 const UserItem = ({user}) => {
     const dispatch = useDispatch();

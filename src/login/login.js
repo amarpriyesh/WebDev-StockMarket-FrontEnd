@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import { loginThunk } from "../services/user-thunks";
+import { loginThunk } from "../thunks/user-thunks";
 import { useSelector } from "react-redux";
 function LoginScreen() {
     const { currentUser } = useSelector((state) => state.user);

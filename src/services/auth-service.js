@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const USERS_URL = "http://localhost:4000/api/auth";
+const USERS_URL = process.env.ENVIRONMENT==="TEST"? `${process.env.BASE_URL_TEST}/api/auth` : `${process.env.BASE_URL_PRODUCTION}/api/auth`
 
 const api = axios.create({
                              withCredentials: true,
@@ -9,6 +9,7 @@ const api = axios.create({
 
 
 export const login = async ({ email, password }) => {
+    console.log(USERS_URL)
     const response = await api.post(`${USERS_URL}/login`, {
         "email":email,
         "password": password
