@@ -1,7 +1,7 @@
 import React, {useEffect,useState} from 'react';
 import {Link, Navigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {findAllUsersThunk, logoutThunk, profileThunk} from "../services/user-thunks";
+import {findAllUsersThunk, logoutThunk, profileThunk} from "../thunks/user-thunks";
 import UserItem from "./user-item";
 import UserList from "./user-list";
 import {useNavigate} from "react-router";

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const USERS_URL = "http://localhost:4000/api/auth";
+const BASE_URL = process.env.REACT_APP_ENVIRONMENT==="TEST"? process.env.REACT_APP_BASE_URL_TEST: process.env.REACT_APP_BASE_URL_PRODUCTION
 
 const api = axios.create({
                              withCredentials: true,
@@ -9,7 +9,8 @@ const api = axios.create({
 
 
 export const login = async ({ email, password }) => {
-    const response = await api.post(`${USERS_URL}/login`, {
+    console.log("BASE URL",BASE_URL)
+    const response = await api.post(`${BASE_URL}/auth/login`, {
         "email":email,
         "password": password
     });
@@ -17,17 +18,17 @@ export const login = async ({ email, password }) => {
 };
 
 export const logout = async () => {
-    const response = await api.post(`${USERS_URL}/logout`);
+    const response = await api.post(`${BASE_URL}/auth/logout`);
     return response.data;
 };
 
 export const profile = async () => {
-    const response = await api.post(`${USERS_URL}/profile`);
+    const response = await api.post(`${BASE_URL}/auth/profile`);
     return response.data;
 };
 
 export const register = async ({username,password, firstName, lastName, age, email}) => {
-    const response = await api.post(`${USERS_URL}/register`,{
+    const response = await api.post(`${BASE_URL}/auth/register`,{
         username,
         password,
         firstName,
