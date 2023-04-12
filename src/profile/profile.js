@@ -88,7 +88,7 @@ function Profile() {
                     <h3>Personal Information</h3>
                     {currentUser && (
                         <div>
-                            <h1>Welcome {currentUser.username}</h1>
+                            <h1>Welcome {currentUser.firstName}</h1>
                         </div>
                     )}
                     <Link to="/search" className="btn btn-primary">

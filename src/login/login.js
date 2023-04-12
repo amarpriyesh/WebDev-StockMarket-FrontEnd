@@ -5,14 +5,14 @@ import { loginThunk } from "../services/user-thunks";
 import { useSelector } from "react-redux";
 function LoginScreen() {
     const { currentUser } = useSelector((state) => state.user);
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const handleLogin = async () => {
-        dispatch(loginThunk({ username, password }));
+        dispatch(loginThunk({ email, password }));
         navigate("/");
     };
     return (
@@ -29,13 +29,13 @@ function LoginScreen() {
                 </div>
             )}
             <div>
-                <label>Username</label>
+                <label>Email</label>
                 <br />
                 <input
                     className="form-control"
                     type="text"
-                    value={username}
-                    onChange={(event) => setUsername(event.target.value)}
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
                 />
             </div>
             <div>
@@ -49,7 +49,7 @@ function LoginScreen() {
             </div>
             {currentUser && (
                 <div>
-                    <h1>Welcome {currentUser.username}</h1>
+                    <h1>Welcome {currentUser.firstName}</h1>
                 </div>
             )}
         </div>
