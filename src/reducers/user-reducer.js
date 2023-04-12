@@ -22,6 +22,7 @@ const userSlice = createSlice({
         },
         [profileThunk.fulfilled]: (state, { payload }) => {
             state.currentUser = payload;
+            return state.currentUser;
         },
         [registerThunk.fulfilled]: (state, { payload }) => {
             state.currentUser = null;

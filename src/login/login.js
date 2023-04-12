@@ -49,7 +49,7 @@ function LoginScreen() {
             </div>
             {currentUser && (
                 <div>
-                    <h1>Welcome {currentUser.firstName}</h1>
+                    <h1>Welcome {currentUser.firstName} {currentUser.lastName}</h1>
                 </div>
             )}
         </div>
