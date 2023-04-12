@@ -11,9 +11,14 @@ function LoginScreen() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const handleLogin = async () => {
-        dispatch(loginThunk({ email, password }));
-        navigate("/");
+    const handleLogin =  async () => {
+        const response = await dispatch(loginThunk({ email, password }));
+        if (response.error) {
+            setError("Incorrect credentials");
+            navigate("/login")
+        } else {
+            navigate("/");
+        }
     };
     return (
         <div className="container">
@@ -25,7 +30,7 @@ function LoginScreen() {
             </h1>
             {error && (
                 <div className="alert alert-danger" role="alert">
-                    {error}
+                    <pre>{error}</pre>
                 </div>
             )}
             <div>
