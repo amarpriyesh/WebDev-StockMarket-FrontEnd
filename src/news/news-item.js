@@ -1,4 +1,8 @@
 import {Link} from "react-router-dom";
+import Progress from "../progress/progress";
+import SidebarComponent from "../sidebar/sidebar";
+import {useDispatch,useSelector} from "react-redux";
+import {setSidebar} from "../reducers/sidebar-reducer"
 
 const NewsItem = ({news = {"description"
 :
@@ -14,10 +18,12 @@ const NewsItem = ({news = {"description"
     "771e55f3-e624-465a-a6a8-f4ee7599e327"
 
 }}) => {
+    const dispatch = useDispatch();
+    const sidebar = useSelector(state => state.sidebar)
 
     return(
 
-            <li className="list-group-item mt-1 mb-1 rounded bg-light">
+            <li className="list-group-item mt-1 mb-1 rounded bg-light" onClick={() => dispatch(setSidebar({component:"news",newsid:news.title}))}>
     <div className="row" >
 
         <div className="d-none d-sm-none d-md-block col-2">
@@ -43,7 +49,7 @@ const NewsItem = ({news = {"description"
 
                 </div>
             </div>
-            <Link>@{news.source}</Link>
+            <a href={"https://"+news.source}>@{news.source}</a>
             <div className="row">
             <div className="fw-bold col-10 mr-2 text-justify">{news.title}</div>
             <div className="  d-none d-md-none d-lg-flex row col-lg-2 " style={{"border-width": "1px",

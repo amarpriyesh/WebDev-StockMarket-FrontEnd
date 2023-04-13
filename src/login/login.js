@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { loginThunk,googleLoginThunk } from "../thunks/auth-thunks";
 import { useSelector } from "react-redux";
 import {GoogleLogin,GoogleLogout} from "react-google-login";
+import {setSidebar} from "../reducers/sidebar-reducer";
 
 function LoginScreen() {
     const {currentUser} = useSelector((state) => state.user);
@@ -12,6 +13,7 @@ function LoginScreen() {
     const [error, setError] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    dispatch(setSidebar({component:"none",newsid:"ddd"}));
 
     var clientId = "959350101705-iulfiifgd5jt2n09cuuu9vj3a9lnqb0v.apps.googleusercontent.com"
     if (process.env.REACT_APP_ENVIRONMENT == "PRODUCTION") {

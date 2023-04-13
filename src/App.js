@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {useSelector} from "react-redux";
 import Home from './home/home';
 import Profile from "./profile/profile";
 import SearchResults from "./search/searchResults";
@@ -12,6 +13,8 @@ import Navigation from "./components/navigation";
 import RegisterScreen from "./register/register";
 import NewsComponent from "./news/news"
 import NavigationSidebar from "./navigation";
+
+import SidebarComponent from "./sidebar/sidebar";
 
 
 
@@ -42,19 +45,7 @@ function App() {
               </Routes>
                     </div>
                     <div className="d-none d-lg-block col-lg-3  col-xl-3 col-xxl-3">
-                    <div className="  rounded border list-group">
-
-                        <div className="list-group-item bg-light">
-                            Sample
-                        </div>
-                        <div className="list-group-item bg-light">
-                            Sample
-                        </div>
-                        <div className="list-group-item bg-light">
-                            Sample
-                        </div>
-
-                    </div>
+                   <SidebarComponent/>
                     </div>
                 </div>
 
