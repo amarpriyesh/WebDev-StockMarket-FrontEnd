@@ -6,6 +6,7 @@ import {logoutThunk, profileThunk} from "../thunks/auth-thunks";
 import UserItem from "./user-item";
 import UserList from "./user-list";
 import {useNavigate} from "react-router";
+import {setSidebar} from "../reducers/sidebar-reducer";
 
 function Profile() {
 
@@ -17,6 +18,7 @@ function Profile() {
         dispatch(findAllUsersThunk());
     }, []);*/
     useEffect( () => {
+        dispatch(setSidebar({component:"none",newsid:"ddd"}));
          dispatch(profileThunk());
         console.log("here")
         dispatch(findAllUsersThunk());

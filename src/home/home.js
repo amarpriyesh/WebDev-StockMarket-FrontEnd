@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import {profileThunk} from "../thunks/auth-thunks";
 import {useDispatch} from "react-redux";
+import {setSidebar} from "../reducers/sidebar-reducer";
 
 
 function Home() {
@@ -11,6 +12,7 @@ function Home() {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(profileThunk());
+        dispatch(setSidebar({component:"none",newsid:"ddd"}));
     }, []);
 
     const fetchData = async () => {

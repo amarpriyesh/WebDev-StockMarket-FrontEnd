@@ -1,8 +1,12 @@
 import React, {useState} from 'react';
 import {Link, useLocation, useParams} from "react-router-dom";
 import axios from "axios";
+import {setSidebar} from "../reducers/sidebar-reducer";
+import {useDispatch} from "react-redux";
 
 function SearchResults() {
+    const dispatch = useDispatch()
+    dispatch(setSidebar({component:"none",newsid:"ddd"}));
     const { searchCriteria } = useParams();
     const location = useLocation();
     const [searchQuery, setSearchQuery] = useState(searchCriteria || '');
