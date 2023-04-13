@@ -43,7 +43,7 @@ const NewsItem = ({news = {"description"
 
                 </div>
             </div>
-            <Link>@{news.source}</Link>
+            <a href={"https://"+news.source}>@{news.source}</a>
             <div className="row">
             <div className="fw-bold col-10 mr-2 text-justify">{news.title}</div>
             <div className="  d-none d-md-none d-lg-flex row col-lg-2 " style={{"border-width": "1px",
