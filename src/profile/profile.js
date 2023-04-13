@@ -40,6 +40,7 @@ function Profile() {
                     <h3>Personal Information</h3>
                     {currentUser && (
                         <div>
+                            <img src={currentUser.profilePhoto}/>
                             <h1>Welcome {currentUser.firstName} {currentUser.lastName}</h1>
                         </div>
                     )}

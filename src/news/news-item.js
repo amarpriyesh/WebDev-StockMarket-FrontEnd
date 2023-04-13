@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 
 const NewsItem = ({news = {"description"
 :
@@ -19,35 +20,44 @@ const NewsItem = ({news = {"description"
             <li className="list-group-item mt-1 mb-1 rounded bg-light">
     <div className="row" >
 
-        <div className="col-2">
+        <div className="d-none d-sm-none d-md-block col-2">
 
-            <img  src={news.image} height={120} width={120}/>
+            <img  src={news.image}  className="img-fluid"
+            />
 <div>
-            <span>Symbol:</span> <span className="fw-bold"> {news.symbol}
+            <span>Symbol:</span> <span className="fw-bold text-nowrap"> {news.symbol}
                </span>
 </div>
         </div>
 
 
-        <div className="col-10">
+        <div className="col-sm-12 col-md-10">
             <div className="row">
-                <div className="col-3">
+                <div className="col-md-4 col-6">
                     <span className="align-content-left fw-bolder fs-5"> {news.company}</span>
                 </div>
-                <div className="col-6 text-center">
+                <div className="d-none d-sm-none d-md-block col-md-4 text-center">
                     <span >{news.industry}</span>         </div>
-                <div className="col-3">
+                <div className="col-md-4 col-6">
                     <span className="float-end">{new Date(news.time).toLocaleString()}</span>
 
                 </div>
             </div>
-            @{news.source}
+            <Link>@{news.source}</Link>
             <div className="row">
-            <div className="fw-bold col-10">{news.title}</div>
-
-            <input style={{"width": "120px"}} type="range" className="form-range float-end col-2" min="-1" max="1" id="customRange3"  value={news.sentiment}  width={120}/>
+            <div className="fw-bold col-10 mr-2 text-justify">{news.title}</div>
+            <div className="  d-none d-md-none d-lg-flex row col-lg-2 " style={{"border-width": "1px",
+                "border-style": "outset",
+                "box-shadow": "2px 2px #888888",
+                "height":"50px"
+            }} >
+               <div className="text-center p-0" style={{ "margin": "0 auto",
+                   float: "none"}} > Sentiment </div>
+            <input style={{"width": "50px" , "margin": "0 auto",
+                float: "none"}} type="range" className="form-range" min="-1" max="1" id="customRange3"  value={news.sentiment}  />
             </div>
-            <div>{news.description}</div>
+            </div>
+            <div className=" text-justify">{news.description}</div>
         </div>
         </div>
             </li>
