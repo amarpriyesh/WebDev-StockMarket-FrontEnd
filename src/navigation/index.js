@@ -12,6 +12,9 @@ const NavigationSidebar = (
     const active = paths[2];
     return (
         <>
+            {currentUser && (
+                <p>Hello, {currentUser.firstName}!</p>
+            )}
             <div className="list-group  d-none d-lg-block  fs-6">
                 <Link to="/" className={`list-group-item  bg-light ${active === '/'?'active':''}`}>
                     <i className="fa fa-newspaper-o fa-2x" style={{"color":"blue"}}></i> MarketNews
