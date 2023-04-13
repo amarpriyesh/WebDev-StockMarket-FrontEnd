@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "http://localhost:4000/api";
+const BASE_URL = "http://localhost:4001/api";
 const NEWS_URL = `${BASE_URL}/news`;
 console.log("NEWS_URL", NEWS_URL);
 

@@ -12,6 +12,7 @@ import Navigation from "./components/navigation";
 import RegisterScreen from "./register/register";
 import NewsComponent from "./news/news"
 import NavigationSidebar from "./navigation";
+import View from "./view/view";
 
 
 
@@ -31,6 +32,7 @@ function App() {
               <Routes>
                   <Route exact path="/" element={<Home/>}/>
                   <Route exact path="/home" element={<Home/>}/>
+                  <Route path="/views" element={<View/>}/>
                   <Route path="/profile" element={<Profile/>}/>
                   <Route path="/profile/:uid" element={<Profile/>}/>
                   <Route path="/search/:searchCriteria" element={<SearchResults/>} />

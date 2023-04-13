@@ -22,10 +22,12 @@ const NewsItem = ({news = {"description"
         <div className="col-2">
 
             <img  src={news.image} height={120} width={120}/>
-<div>
-            <span>Symbol:</span> <span className="fw-bold"> {news.symbol}
-               </span>
-</div>
+
+            <div>
+                <span>Symbol:</span>
+                <span className="fw-bold"> {news.symbol} </span>
+            </div>
+
         </div>
 
 

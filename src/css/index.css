@@ -1,0 +1,103 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css');
+@import url('https://bootswatch.com/5/cyborg/bootstrap.min.css');
+
+.wd-input-dark-mode {
+    color: white;
+    width: 100%;
+    height: 35px;
+    border-radius: 50px;
+    border-style: solid;
+    border-color: black;
+}
+
+.wd-who-to-follow-img {
+    border-radius: 50%;
+}
+
+.wd-float-left {
+    float: left;
+}
+
+.wd-font-size {
+    font-size:26px;
+}
+
+.wd-bottom-left {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+}
+
+.wd-post-img {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.wd-topic, .wd-tuits, .wd-handle, .wd-time {
+    font-size: 14px;
+    color: rgb(110, 118, 125);
+}
+
+.wd-topic, .wd-tuits {
+    display: block;
+}
+
+.wd-post-image {
+    width: 95px;
+    height: 95px;
+    border-radius: 15px;
+    float: left;
+}
+
+.wd-tabs-link {
+    text-decoration: none;
+    font-size: 15px;
+    color: rgb(110, 118, 125);
+}
+
+.wd-whats-happening-textarea {
+    background-color: #222;
+    border: none;
+    width: 100%;
+    height: 50px;
+    color: white;
+}
+
+.wd-profile-textarea {
+    background-color: #222;
+    border: none;
+    width: 100%;
+}
+
+.wd-whats-happening-button {
+    width: 10px;
+}
+
+.wd-profile-picture {
+    border-radius: 50px;
+}
+
+.wd-profile-details {
+    float: left;
+    padding-right: 10px;
+}
+
+.wd-edit-button {
+    border-style: solid;
+    border-color: white;
+    color: white;
+}
+
+.wd-bg-dark, input:focus {
+    background-color: #222;
+}
+
+.wd-overlap {
+    z-index: 10;
+}
+
+.wd-text-color-black {
+    color: black;
+}
