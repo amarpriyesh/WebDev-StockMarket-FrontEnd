@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
-import {profileThunk} from "../thunks/user-thunks";
+import {profileThunk} from "../thunks/auth-thunks";
 import {useDispatch} from "react-redux";
 
 
