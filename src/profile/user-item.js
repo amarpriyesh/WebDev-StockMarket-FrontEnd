@@ -1,5 +1,5 @@
 import {useDispatch} from "react-redux";
-import {deleteUserThunk} from "../services/user-thunks";
+import {deleteUserThunk} from "../thunks/user-thunks";
 
 const UserItem = ({user}) => {
     const dispatch = useDispatch();
@@ -10,7 +10,7 @@ const UserItem = ({user}) => {
         <li className="list-group-item">
             <div className="row">
                 <div className="col-12">
-                        <span className="">{user.username}</span>&nbsp;
+                        <span className="">{user.firstName} {user.lastName} </span>&nbsp;
                         {user.role}
                         <span className="btn btn-primary float-right"
                         onClick={() => deleteUserHandler(user._id)}>Delete</span>

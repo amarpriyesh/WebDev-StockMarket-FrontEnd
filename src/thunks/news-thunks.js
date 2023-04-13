@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import * as newsService from "./news-service";
+import * as newsService from "../services/news-service";
 
 
 export const findAllNewsThunk = createAsyncThunk(

@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const USERS_URL = "http://localhost:4001/api/users";
+
+const BASE_URL = process.env.REACT_APP_ENVIRONMENT==="TEST"? process.env.REACT_APP_BASE_URL_TEST: process.env.REACT_APP_BASE_URL_PRODUCTION
+
 
 const api = axios.create({
     withCredentials: true,
@@ -8,46 +10,17 @@ const api = axios.create({
 
 
 export const findAllUsers = async () => {
-    const response = await api.get(USERS_URL);
+    const response = await api.get(`${BASE_URL}/users`);
     return response.data;
 };
 
 export const deleteUser = async (userId) => {
-    const response = await api.delete(`${USERS_URL}/${userId}`);
+    const response = await api.delete(`${BASE_URL}/users/${userId}`);
     return response.data;
 };
 
 export const updateUser = async (user) => {
-    const response = await api.put(`${USERS_URL}/${user._id}`, user);
+    const response = await api.put(`${BASE_URL}/users/${user._id}`, user);
     return response.data;
 };
 
-export const login = async ({ username, password }) => {
-    const response = await api.post(`${USERS_URL}/login`, {
-        username,
-        password,
-    });
-    return response.data;
-};
-
-export const logout = async () => {
-    const response = await api.post(`${USERS_URL}/logout`);
-    return response.data;
-};
-
-export const profile = async () => {
-    const response = await api.post(`${USERS_URL}/profile`);
-    return response.data;
-};
-
-export const register = async ({username,password, firstName, lastName, age, email}) => {
-    const response = await api.post(`${USERS_URL}/register`,{
-        username,
-        password,
-        firstName,
-        lastName,
-        age,
-        email
-    });
-    return response.data;
-};

@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {findAllUsersThunk} from "../services/user-thunks";
+import {findAllUsersThunk} from "../thunks/user-thunks";
 import UserItem from "./user-item";
 
 const UserList = () => {

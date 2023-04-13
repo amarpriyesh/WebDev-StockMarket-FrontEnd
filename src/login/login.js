@@ -1,19 +1,57 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import { loginThunk } from "../services/user-thunks";
+import { loginThunk,googleLoginThunk } from "../thunks/auth-thunks";
 import { useSelector } from "react-redux";
+import {GoogleLogin,GoogleLogout} from "react-google-login";
+import {setSidebar} from "../reducers/sidebar-reducer";
+
 function LoginScreen() {
-    const { currentUser } = useSelector((state) => state.user);
-    const [username, setUsername] = useState("");
+    const {currentUser} = useSelector((state) => state.user);
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    dispatch(setSidebar({component:"none",newsid:"ddd"}));
 
-    const handleLogin = async () => {
-        dispatch(loginThunk({ username, password }));
-        navigate("/");
+    var clientId = "959350101705-iulfiifgd5jt2n09cuuu9vj3a9lnqb0v.apps.googleusercontent.com"
+    if (process.env.REACT_APP_ENVIRONMENT == "PRODUCTION") {
+        clientId = "959350101705-2b65fq1nv6o2211ipkt87cb7a5askm82.apps.googleusercontent.com"
+    }
+
+    const responseGoogle = async (response) => {
+        const user = {
+            username: response.profileObj.givenName,
+            password: response.profileObj.googleId,
+            email: response.profileObj.email,
+            profilePhoto: response.profileObj.imageUrl,
+            firstName: response.profileObj.givenName,
+            lastName: response.profileObj.familyName
+
+        }
+        console.log("google user", user)
+
+        const returnedUserResponse = await dispatch(googleLoginThunk(user));
+        if (returnedUserResponse.error) {
+            setError("Incorrect credentials");
+            navigate("/login")
+        } else {
+            navigate("/");
+        }
+
+        console.log('Logged In', currentUser);
+
+    }
+
+    const handleLogin =  async () => {
+        const response = await dispatch(loginThunk({ email, password }));
+        if (response.error) {
+            setError("Incorrect credentials");
+            navigate("/login")
+        } else {
+            navigate("/");
+        }
     };
     return (
         <div className="container">
@@ -21,21 +59,29 @@ function LoginScreen() {
                 <button onClick={handleLogin} className="float-end btn btn-primary">
                     Login
                 </button>
+                <div>
+                    <GoogleLogin
+                        clientId={clientId}
+                        buttonText="Login with Google"
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                        cookiePolicy={'single_host_origin'}
+                    /></div>
                 Login Screen
             </h1>
             {error && (
                 <div className="alert alert-danger" role="alert">
-                    {error}
+                    <pre>{error}</pre>
                 </div>
             )}
             <div>
-                <label>Username</label>
+                <label>Email</label>
                 <br />
                 <input
                     className="form-control"
                     type="text"
-                    value={username}
-                    onChange={(event) => setUsername(event.target.value)}
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
                 />
             </div>
             <div>
@@ -49,7 +95,7 @@ function LoginScreen() {
             </div>
             {currentUser && (
                 <div>
-                    <h1>Welcome {currentUser.username}</h1>
+                    <h1>Welcome {currentUser.firstName} {currentUser.lastName}</h1>
                 </div>
             )}
         </div>
