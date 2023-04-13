@@ -17,6 +17,13 @@ export const login = async ({ email, password }) => {
     return response.data;
 };
 
+export const googleLogin = async (user) => {
+    console.log("BASE URL",BASE_URL)
+    const response = await api.post(`${BASE_URL}/auth/google-login`, user);
+    return response.data;
+};
+
+
 export const logout = async () => {
     const response = await api.post(`${BASE_URL}/auth/logout`);
     return response.data;

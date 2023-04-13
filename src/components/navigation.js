@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {logoutThunk} from "../thunks/user-thunks";
+import {logoutThunk} from "../thunks/auth-thunks";
 function Navigation() {
     const { currentUser } = useSelector((state) => state.user);
     const dispatch = useDispatch();
