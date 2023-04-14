@@ -5,20 +5,17 @@ import Progress from "../progress/progress";
 import {profileThunk} from "../thunks/auth-thunks";
 import {findAllUsersThunk} from "../thunks/user-thunks";
 import {setSidebar} from "../reducers/sidebar-reducer"
+import HighlightComponent from "../highlights/highlight-component"
 
 
 const SidebarComponent = () => {
     const sidebar = useSelector((state) => state.sidebar)
-    const dispatch = useDispatch()
-    useEffect( () => {
-        dispatch(setSidebar({component:"none",newsid:"ddd"}));
 
-    }, [] );
     if (sidebar.component == "none") {
         return (<Progress/>)
     }
 else if (sidebar.component === "news"){
-        return( <>{sidebar.newsid}</>)
+        return( <HighlightComponent/>)
     }
 
 else{

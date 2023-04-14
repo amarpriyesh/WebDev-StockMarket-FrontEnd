@@ -23,7 +23,7 @@ const NewsItem = ({news = {"description"
 
     return(
 
-            <li className="list-group-item mt-1 mb-1 rounded bg-light" onClick={() => dispatch(setSidebar({component:"news",newsid:news.title}))}>
+            <li className="list-group-item mt-1 mb-1 rounded bg-light" onClick={() => dispatch(setSidebar({component:"news",newsid:news._id}))}>
     <div className="row" >
 
         <div className="d-none d-sm-none d-md-block col-2">
