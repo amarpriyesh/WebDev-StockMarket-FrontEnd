@@ -1,4 +1,5 @@
 import ViewStats from "./view-stats";
+import moment from "moment";
 
 const ViewListItem = ({view = {
     "firstName": "John",
@@ -25,8 +26,13 @@ const ViewListItem = ({view = {
                     <div className="ps-1">
                         <span className="wd-author"><strong>{view.username}</strong></span>
                         <i cl  assName="fa fa-check-circle"></i>
+
+                        <span> - { moment(view.datePosted).format('DD MMM, YYYY')} </span>
+                    </div>
+                    <div>
                     </div>
                 </div>
+
 
             </div>
 
