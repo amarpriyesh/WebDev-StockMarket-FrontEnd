@@ -15,3 +15,15 @@ export const updateView = async (view) => {
         .put(`${NEWS_URL}/${view._id}`, view);
     return view;
 }
+
+export const createView = async (view) => {
+    const response = await axios
+        .post(`${NEWS_URL}`, view);
+    return response.data;
+}
+
+export const deleteView = async (viewId) => {
+    const response = await axios
+        .delete(`${NEWS_URL}/${viewId}`);
+    return response.data;
+}

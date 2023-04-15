@@ -1,5 +1,5 @@
 import {useDispatch} from "react-redux";
-import {updateViewThunk} from "../services/views-thunk";
+import {updateViewThunk} from "../thunks/views-thunk";
 
 const ViewStats = ({view}) => {
     const dispatch = useDispatch();

@@ -1,23 +1,19 @@
 import ViewStats from "./view-stats";
 import moment from "moment";
+import {useDispatch} from "react-redux";
+import {deleteViewThunk, findAllViewsThunk} from "../thunks/views-thunk";
+import {useEffect} from "react";
 
-const ViewListItem = ({view = {
-    "firstName": "John",
-    "lastName": "Cusack",
-    "age": 20,
-    "username": "john123",
-    "password": "123",
-    "role": "ADMIN",
-    "likes": 0,
-    "messageCount": 0,
-    "tags": "",
-    "view": "This is the view written by John"}}) => {
+const ViewListItem = ({view}) => {
+    const dispatch = useDispatch();
 
-
+    const deleteViewHandler = (id) => {
+        dispatch(deleteViewThunk(id));
+    }
 
     return(
 
-        <li className="list-group-item mt-1 mb-1 rounded bg-light">
+        <li className="list-group-item mb-3 rounded bg-light">
             <div className="row">
                 <div className="col-1">
                     <img className="wd-who-to-follow-img" width="50px" height="50px" src="/images/elonavatar.jpg"/>
@@ -26,13 +22,15 @@ const ViewListItem = ({view = {
                     <div className="ps-1">
                         <span className="wd-author"><strong>{view.username}</strong></span>
                         <i cl  assName="fa fa-check-circle"></i>
-
-                        <span> - { moment(view.datePosted).format('DD MMM, YYYY')} </span>
+                        <span className="wd-author"> - {moment(view.datePosted).format('MMMM Do, YYYY') }</span>
                     </div>
                     <div>
                     </div>
                 </div>
 
+                <div className="col-1">
+                    <i onClick={() => deleteViewHandler(view._id)} className="fas fa-remove fa-2x fa-pull-right"></i>
+                </div>
 
             </div>
 
