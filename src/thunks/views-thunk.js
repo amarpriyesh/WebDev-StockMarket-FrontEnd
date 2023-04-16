@@ -31,3 +31,11 @@ export const createViewThunk =
             const newView = await viewsService.createView(view);
             return newView;
         });
+
+export const createViewCommentThunk =
+    createAsyncThunk(
+        'views/createViewComment',
+        async (comment) => {
+            const newComment = await viewsService.createViewComment(comment);
+            return newComment;
+        });

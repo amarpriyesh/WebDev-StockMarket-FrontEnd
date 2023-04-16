@@ -24,3 +24,7 @@ export const updateUser = async (user) => {
     return response.data;
 };
 
+export const findUserById = async (userId) => {
+    const response = await api.get(`${BASE_URL}/users/${userId}`);
+    return response.data;
+};

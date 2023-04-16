@@ -1,11 +1,12 @@
 import ViewStats from "./view-stats";
 import moment from "moment";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {deleteViewThunk, findAllViewsThunk} from "../thunks/views-thunk";
 import {useEffect} from "react";
 
 const ViewListItem = ({view}) => {
     const dispatch = useDispatch();
+    const { currentUser } = useSelector((state) => state.user);
 
     const deleteViewHandler = (id) => {
         dispatch(deleteViewThunk(id));
@@ -29,7 +30,9 @@ const ViewListItem = ({view}) => {
                 </div>
 
                 <div className="col-1">
+                    {currentUser && currentUser.username === view.username &&
                     <i onClick={() => deleteViewHandler(view._id)} className="fas fa-remove fa-2x fa-pull-right"></i>
+                    }
                 </div>
 
             </div>

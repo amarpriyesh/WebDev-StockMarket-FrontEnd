@@ -1,5 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import * as userService from "../services/user-service";
+import {findUserById} from "../services/user-service";
 
 
 
@@ -19,3 +20,13 @@ export const deleteUserThunk = createAsyncThunk(
         return await userService.deleteUser(userId);
     }
 );
+
+export const findUserByIdThunk = createAsyncThunk(
+    "user/findUserById",
+    async (userId) => {
+        return await userService.findUserById(userId);
+    }
+);
+
+
+

@@ -1,15 +1,62 @@
 import {useDispatch} from "react-redux";
 import {updateViewThunk} from "../thunks/views-thunk";
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import popupScreen from './comment/popup-comment.js'
+import {useState} from "react";
+import React, { Component } from "react";
+import { Modal, Button } from "react-bootstrap";
+import ViewListItem from "./view-list-item";
+import PopupComment from "./comment/popup-comment.js"
 
 const ViewStats = ({view}) => {
     const dispatch = useDispatch();
     const likeView = () => {
         dispatch({type: 'like-tuit', view});
     };
+
+    const [showModal, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     return (
         <>
             <div className="p-2 pe-4 wd-float-left">
-                <a className="wd-tabs-link" href="#"><i className="me-2 fa-regular fa-comment"></i>{view.messageCount}</a>
+
+                <span onClick={handleShow}><i className="me-2 fa-regular fa-comment"></i>{view.messageCount}</span>
+
+
+
+                <Modal show={showModal} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title className="">Comment Section</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+
+
+                        Woohoo, you're reading this text in a modal!
+
+
+                        <ul className="list-group">
+                            {
+                                view.comment && view.comment.map(t =>
+                                <PopupComment comment={t} key={t._id}/>
+                                    )
+                            }
+                        </ul>
+
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                        <Button variant="primary" onClick={handleClose}>
+                            Save Changes
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
             </div>
 
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "http://localhost:4001/api";
+const BASE_URL = "http://localhost:4000/api";
 const NEWS_URL = `${BASE_URL}/views`;
 console.log("NEWS_URL", NEWS_URL);
 
@@ -22,8 +22,15 @@ export const createView = async (view) => {
     return response.data;
 }
 
+export const createViewComment = async (view) => {
+    const response = await axios
+        .post(`${NEWS_URL}`, view);
+    return response.data;
+}
+
 export const deleteView = async (viewId) => {
     const response = await axios
         .delete(`${NEWS_URL}/${viewId}`);
     return response.data;
 }
+
