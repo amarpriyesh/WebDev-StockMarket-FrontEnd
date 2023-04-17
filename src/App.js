@@ -16,6 +16,7 @@ import NavigationSidebar from "./navigation";
 
 import SidebarComponent from "./sidebar/sidebar";
 import EditProfile from "./edit-profile/edit-profile";
+import LoadProfile from "./load-profile";
 
 
 
@@ -23,6 +24,7 @@ function App() {
 
   return (
       <Provider store={store}>
+          <LoadProfile>
         <div className="App">
             <Router>
                 <div className="row m-1 ">
@@ -53,6 +55,7 @@ function App() {
 
             </Router>
         </div>
+              </LoadProfile>
       </Provider>
 
   );
