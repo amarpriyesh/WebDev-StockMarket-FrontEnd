@@ -26,7 +26,6 @@ function Profile() {
 
     return (
         <div className="container">
-            <pre>{JSON.stringify(currentUser, null, 2)}</pre>
             <h2>Profile</h2>
             <button onClick={() => {
                 dispatch(logoutThunk());

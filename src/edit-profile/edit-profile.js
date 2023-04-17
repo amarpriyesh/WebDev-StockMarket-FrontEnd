@@ -22,7 +22,6 @@ function EditProfile() {
     return (
         profile && (
         <div className="container">
-            <pre>{JSON.stringify(currentUser, null, 2)}</pre>
             <h1>Edit Profile</h1>
             <div className="row">
                 <div className="col-md-6">
