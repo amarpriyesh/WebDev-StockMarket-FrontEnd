@@ -15,6 +15,7 @@ import NewsComponent from "./news/news"
 import NavigationSidebar from "./navigation";
 
 import SidebarComponent from "./sidebar/sidebar";
+import EditProfile from "./edit-profile/edit-profile";
 
 
 
@@ -35,6 +36,7 @@ function App() {
                   <Route exact path="/" element={<Home/>}/>
                   <Route exact path="/home" element={<Home/>}/>
                   <Route path="/profile" element={<Profile/>}/>
+                  <Route path="/editProfile" element={<EditProfile/>}/>
                   <Route path="/profile/:uid" element={<Profile/>}/>
                   <Route path="/search/:searchCriteria" element={<SearchResults/>} />
                   <Route path="/search" element={<SearchResults/>} />
