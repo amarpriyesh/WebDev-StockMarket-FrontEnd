@@ -17,6 +17,7 @@ import NavigationSidebar from "./navigation";
 import SidebarComponent from "./sidebar/sidebar";
 import EditProfile from "./edit-profile/edit-profile";
 import LoadProfile from "./load-profile";
+import OtherProfile from "./other-profile/other-profile";
 
 
 
@@ -39,7 +40,7 @@ function App() {
                   <Route exact path="/home" element={<Home/>}/>
                   <Route path="/profile" element={<Profile/>}/>
                   <Route path="/editProfile" element={<EditProfile/>}/>
-                  <Route path="/profile/:uid" element={<Profile/>}/>
+                  <Route path="/profile/:id" element={<OtherProfile/>}/>
                   <Route path="/search/:searchCriteria" element={<SearchResults/>} />
                   <Route path="/search" element={<SearchResults/>} />
                   <Route path="/details/:id" element={<Details/>} />
