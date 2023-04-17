@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {createViewThunk} from "../../thunks/views-thunk";
 
-function CreateComment() {
+function CreateComment({comment}) {
     let [newComment, setNewComment] = useState('');
     const dispatch = useDispatch();
 
@@ -33,6 +33,26 @@ function CreateComment() {
         setNewComment('');
 
          */
+
+        let newCommentAdd = {
+            "userId": currentUser.userId,
+            "message": newComment,
+            "likes": 0,
+            "dislikes":0,
+            "profilePhoto": currentUser.profilePhoto,
+            "datePosted": new Date()
+        }
+        //comment.push(comment[0]);
+
+        //let newCommentArray = {{comment}, newCommentAdd}
+        let newData = comment.map((item) =>
+            Object.assign({}, item, {selected:false})
+        )
+        newData.push(newCommentAdd)
+        //comment.push(newCommentAdd);
+        console.log("comment");
+        console.log(newData);
+        console.log("comment");
     }
 
 
@@ -41,7 +61,7 @@ function CreateComment() {
         <>
             {currentUser &&
                 <div className="row">
-                    <div className="col-10">
+                    <div className="col-12">
                         <textarea value={newComment} placeholder="My View . . ."
                                   className="form-control border-0"
                                   onChange={(event) => setNewComment(event.target.value)}>

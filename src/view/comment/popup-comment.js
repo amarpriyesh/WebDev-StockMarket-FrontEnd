@@ -25,9 +25,7 @@ export default function PopupComment ({comment}){
 
     return (
         <>
-            {
-                currentUser && <CreateComment comment={comment}/>
-            }
+
             <li className="list-group-item mb-3 rounded bg-light">
                 <div className="row">
                     <div className="col-2">
@@ -40,7 +38,9 @@ export default function PopupComment ({comment}){
                         </div>
                     </div>
                     <div className="col-1">
+                        { currentUser && currentUser.username === comment.username &&
                         <i onClick={deleteTuitHandler(comment._id)} className="fas fa-remove fa-2x fa-pull-right"></i>
+                        }
                     </div>
                 </div>
 

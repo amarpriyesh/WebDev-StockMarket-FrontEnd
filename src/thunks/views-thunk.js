@@ -35,7 +35,7 @@ export const createViewThunk =
 export const createViewCommentThunk =
     createAsyncThunk(
         'views/createViewComment',
-        async (comment) => {
-            const newComment = await viewsService.createViewComment(comment);
-            return newComment;
+        async (view) => {
+            const newView = await viewsService.createViewComment(view);
+            return newView;
         });

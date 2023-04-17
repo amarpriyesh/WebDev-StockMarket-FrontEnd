@@ -1,5 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {createViewThunk, deleteViewThunk, findAllViewsThunk, updateViewThunk} from "../thunks/views-thunk";
+import {
+    createViewCommentThunk,
+    createViewThunk,
+    deleteViewThunk,
+    findAllViewsThunk,
+    updateViewThunk
+} from "../thunks/views-thunk";
 
 const initialState = {
     view: []
@@ -45,7 +51,19 @@ const viewSlice = createSlice({
                 state.view[viewNdx] = {
                     ...state.view[viewNdx]
                 }
-            }
+            },
+
+        [createViewCommentThunk.fulfilled]:
+            (state, { payload }) => {
+                state.loading = false
+                const viewNdx = state.view
+                    .findIndex((t) => t._id === payload._id)
+                state.view[viewNdx] = {
+                    ...state.view[viewNdx],
+                    ...payload
+                }
+            },
+
     }
 });
 

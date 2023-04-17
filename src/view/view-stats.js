@@ -1,4 +1,4 @@
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {updateViewThunk} from "../thunks/views-thunk";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
@@ -8,6 +8,7 @@ import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import ViewListItem from "./view-list-item";
 import PopupComment from "./comment/popup-comment.js"
+import CreateComment from "./comment/create-comment";
 
 const ViewStats = ({view}) => {
     const dispatch = useDispatch();
@@ -19,6 +20,8 @@ const ViewStats = ({view}) => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const { currentUser } = useSelector((state) => state.user);
 
     return (
         <>
@@ -35,8 +38,9 @@ const ViewStats = ({view}) => {
                     <Modal.Body>
 
 
-                        Woohoo, you're reading this text in a modal!
-
+                        {
+                            currentUser && <CreateComment comment={view.comment}/>
+                        }
 
                         <ul className="list-group">
                             {
