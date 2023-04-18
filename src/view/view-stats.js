@@ -39,7 +39,7 @@ const ViewStats = ({view}) => {
 
 
                         {
-                            currentUser && <CreateComment comment={view.comment}/>
+                            currentUser && <CreateComment comment={view.comment} view={view}/>
                         }
 
                         <ul className="list-group">
@@ -75,7 +75,7 @@ const ViewStats = ({view}) => {
                                style={{color: 'red'}}></i>
                         }
                         {
-                            !view.liked &&
+                            !view.liked  &&
                             <i onClick={() => dispatch(updateViewThunk({...view,likes: view.likes + 1}))}
                                className="me-2 fa-solid fa-heart"
                                style={{color: 'red'}}></i>

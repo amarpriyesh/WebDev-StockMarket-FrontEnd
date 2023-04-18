@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  findAllUsersThunk,
+    findAllUsersThunk, updateUserThunk,
 } from "../thunks/user-thunks";
 import {
     loginThunk,
@@ -35,6 +35,9 @@ const userSlice = createSlice({
         },
         [findAllUsersThunk.fulfilled]: (state,{payload}) => {
             state.allUsers = payload;
+        },
+        [updateUserThunk.fulfilled]: (state, { payload }) => {
+            state.currentUser = payload;
         }
     },
 });

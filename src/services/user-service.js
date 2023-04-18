@@ -1,8 +1,6 @@
 import axios from "axios";
 
-
 const BASE_URL = process.env.REACT_APP_ENVIRONMENT==="TEST"? process.env.REACT_APP_BASE_URL_TEST: process.env.REACT_APP_BASE_URL_PRODUCTION
-
 
 const api = axios.create({
     withCredentials: true,
@@ -27,4 +25,5 @@ export const updateUser = async (user) => {
 export const findUserById = async (userId) => {
     const response = await api.get(`${BASE_URL}/users/${userId}`);
     return response.data;
-};
+}
+

@@ -16,6 +16,9 @@ import NavigationSidebar from "./navigation";
 import View from "./view/view";
 
 import SidebarComponent from "./sidebar/sidebar";
+import EditProfile from "./edit-profile/edit-profile";
+import LoadProfile from "./load-profile";
+import OtherProfile from "./other-profile/other-profile";
 
 
 
@@ -23,6 +26,7 @@ function App() {
 
   return (
       <Provider store={store}>
+          <LoadProfile>
         <div className="App">
             <Router>
                 <div className="row m-1 ">
@@ -37,7 +41,8 @@ function App() {
                   <Route exact path="/home" element={<Home/>}/>
                   <Route path="/views" element={<View/>}/>
                   <Route path="/profile" element={<Profile/>}/>
-                  <Route path="/profile/:uid" element={<Profile/>}/>
+                  <Route path="/editProfile" element={<EditProfile/>}/>
+                  <Route path="/profile/:id" element={<OtherProfile/>}/>
                   <Route path="/search/:searchCriteria" element={<SearchResults/>} />
                   <Route path="/search" element={<SearchResults/>} />
                   <Route path="/details/:id" element={<Details/>} />
@@ -53,6 +58,7 @@ function App() {
 
             </Router>
         </div>
+              </LoadProfile>
       </Provider>
 
   );

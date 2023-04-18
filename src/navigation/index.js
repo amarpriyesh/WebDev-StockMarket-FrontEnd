@@ -67,15 +67,21 @@ const NavigationSidebar = (
                 <Link to="/search" className={`list-group-item ${active === 'search'?'active':''}`}>
                     <i className="fa fa-hashtag"></i>
                 </Link>
+                {currentUser &&(
                 <Link to="/profile" className={`list-group-item ${active === 'profile'?'active':''}`}>
                     <i className="fa fa-laptop"></i>
                 </Link>
+                )}
+                {!currentUser &&(
                 <Link to="/login" className={`list-group-item ${active === 'login'?'active':''}`}>
                     <i className="fa fa-laptop"></i>
                 </Link>
+                )}
+                {!currentUser &&(
                 <Link to="/register" className={`list-group-item ${active === 'register'?'active':''}`}>
                     <i className="fa fa-laptop"></i>
                 </Link>
+                )}
                 <div className="row pt-3 pe-2">
                     <button type="button"
                             className="btn btn-primary btn-lg btn-block rounded-pill width1">Tweet

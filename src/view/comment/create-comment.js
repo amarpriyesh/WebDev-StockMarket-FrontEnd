@@ -1,8 +1,9 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {createViewThunk} from "../../thunks/views-thunk";
+import {createViewCommentThunk, createViewThunk} from "../../thunks/views-thunk";
+import {createViewComment} from "../../services/views-service";
 
-function CreateComment({comment}) {
+function CreateComment({comment, view}) {
     let [newComment, setNewComment] = useState('');
     const dispatch = useDispatch();
 
@@ -48,10 +49,18 @@ function CreateComment({comment}) {
         let newData = comment.map((item) =>
             Object.assign({}, item, {selected:false})
         )
+
+
+        //view["comment"] = newData;
+
+        let newView = {...view, comment: newData}
+
         newData.push(newCommentAdd)
         //comment.push(newCommentAdd);
         console.log("comment");
         console.log(newData);
+        console.log(newView);
+        dispatch(createViewCommentThunk(newView));
         console.log("comment");
     }
 
