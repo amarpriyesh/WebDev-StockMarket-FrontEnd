@@ -6,6 +6,8 @@ import {useEffect} from "react";
 
 const ViewListItem = ({view}) => {
     const dispatch = useDispatch();
+
+
     const { currentUser } = useSelector((state) => state.user);
 
     const deleteViewHandler = (id) => {

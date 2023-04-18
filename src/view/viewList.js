@@ -12,9 +12,14 @@ const ViewList = () => {
     //const [views, setViews] =useState([])
     const views = useSelector((state) => state.view);
     const dispatch = useDispatch();
+
+   /* const [views,setViews]=useState(view)*/
+
     useEffect(() => {
         dispatch(findAllViewsThunk())
+
     }, [])
+
     //
     // const findViews = () => findAllViews().then(response =>  setViews(response))
     // useEffect(()=> {findViews();},[])

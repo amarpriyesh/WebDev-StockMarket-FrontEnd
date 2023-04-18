@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {createViewCommentThunk, createViewThunk} from "../../thunks/views-thunk";
+import {createViewCommentThunk, createViewThunk, findAllViewsThunk} from "../../thunks/views-thunk";
 import {createViewComment} from "../../services/views-service";
 
 function CreateComment({comment, view}) {
@@ -36,7 +36,8 @@ function CreateComment({comment, view}) {
          */
 
         let newCommentAdd = {
-            "userId": currentUser.userId,
+            "userId": currentUser._id,
+            "username": currentUser.username,
             "message": newComment,
             "likes": 0,
             "dislikes":0,
@@ -44,7 +45,6 @@ function CreateComment({comment, view}) {
             "datePosted": new Date()
         }
         //comment.push(comment[0]);
-
         //let newCommentArray = {{comment}, newCommentAdd}
         let newData = comment.map((item) =>
             Object.assign({}, item, {selected:false})
@@ -63,6 +63,7 @@ function CreateComment({comment, view}) {
         dispatch(createViewCommentThunk(newView));
         console.log("comment");
     }
+
 
 
 

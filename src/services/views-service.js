@@ -24,7 +24,7 @@ export const createView = async (view) => {
 
 export const createViewComment = async (view) => {
     const response = await axios
-        .put(`${NEWS_URL}`, view);
+        .put(`${NEWS_URL}/${view._id}`, view);
     return response.data;
 }
 

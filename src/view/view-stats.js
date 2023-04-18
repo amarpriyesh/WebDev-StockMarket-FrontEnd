@@ -1,9 +1,9 @@
 import {useDispatch, useSelector} from "react-redux";
-import {updateViewThunk} from "../thunks/views-thunk";
+import {findAllViewsThunk, updateViewThunk} from "../thunks/views-thunk";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import popupScreen from './comment/popup-comment.js'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import ViewListItem from "./view-list-item";
@@ -16,12 +16,28 @@ const ViewStats = ({view}) => {
         dispatch({type: 'like-tuit', view});
     };
 
+
+
     const [showModal, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const { currentUser } = useSelector((state) => state.user);
+
+//    const [arrComment,changeComment] = useState(view.comment)
+
+//     useEffect(() => {
+// dispatch(findAllViewsThunk)
+//     }, [arrComment])
+
+
+
+    // const delComment= (id) => {
+    //     const k = arrComment.filter(comment =>  comment._id !== id )
+    // changeComment(k)}
+
+
 
     return (
         <>
@@ -45,19 +61,19 @@ const ViewStats = ({view}) => {
                         <ul className="list-group">
                             {
                                 view.comment && view.comment.map(t =>
-                                <PopupComment comment={t} key={t._id}/>
+                                <PopupComment comment={t} key={t._id} view={view}/>
                                     )
                             }
                         </ul>
 
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
-                            Close
-                        </Button>
-                        <Button variant="primary" onClick={handleClose}>
-                            Save Changes
-                        </Button>
+                        {/*<Button variant="secondary" onClick={handleClose}>*/}
+                        {/*    Close*/}
+                        {/*</Button>*/}
+                        {/*<Button variant="primary" onClick={handleClose}>*/}
+                        {/*    Save Changes*/}
+                        {/*</Button>*/}
                     </Modal.Footer>
                 </Modal>
 
