@@ -10,8 +10,9 @@ import HighlightComponent from "../highlights/highlight-component"
 
 const SidebarComponent = () => {
     const sidebar = useSelector((state) => state.sidebar)
+    console.log("SIDEBAR COMPONENT",sidebar.component)
 
-    if (sidebar.component == "none") {
+    if (sidebar.component === "none") {
         return (<Progress/>)
     }
 else if (sidebar.component === "news"){

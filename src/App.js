@@ -22,15 +22,15 @@ function App() {
 
   return (
       <Provider store={store}>
-        <div className="App">
+        <div className="App "
+        >
             <Router>
                 <div className="row m-1 ">
                     <div className="d-none d-sm-block col-sm-1 col-md-2 col-lg-2 col-xl-2 col-xxl-2">
                         <NavigationSidebar active="news"/>
                     </div>
 
-                    <div className="col-sm-11 col-md-10 col-lg-7 col-xl-7 col-xxl-7"
-                         >
+                    <div className="col-sm-11 col-md-10 col-lg-7 col-xl-7 col-xxl-7">
               <Routes>
                   <Route exact path="/" element={<Home/>}/>
                   <Route exact path="/home" element={<Home/>}/>
@@ -44,7 +44,7 @@ function App() {
                   <Route path="/news" element={<NewsComponent/>} />
               </Routes>
                     </div>
-                    <div className="d-none d-lg-block col-lg-3  col-xl-3 col-xxl-3">
+                    <div className="d-none d-lg-block col-lg-3  col-xl-3 col-xxl-3" style={{ "overflow-y": "auto","display": "none" ,"height": "100vh"}}>
                    <SidebarComponent/>
                     </div>
                 </div>

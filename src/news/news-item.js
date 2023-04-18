@@ -28,7 +28,7 @@ const NewsItem = ({news = {"description"
 
         <div className="d-none d-sm-none d-md-block col-2">
 
-            <img  src={news.image}  className="img-fluid"
+            <img  src={news.image}  className=" rounded" height={80} width={100}
             />
 <div>
             <span>Symbol:</span> <span className="fw-bold text-nowrap"> {news.symbol}
@@ -40,7 +40,7 @@ const NewsItem = ({news = {"description"
         <div className="col-sm-12 col-md-10">
             <div className="row">
                 <div className="col-md-4 col-6">
-                    <span className="align-content-left fw-bolder fs-5"> {news.company}</span>
+                    <span className="align-content-left fw-bolder fs-6"> {news.company}</span>
                 </div>
                 <div className="d-none d-sm-none d-md-block col-md-4 text-center">
                     <span >{news.industry}</span>         </div>
@@ -55,7 +55,8 @@ const NewsItem = ({news = {"description"
             <div className="  d-none d-md-none d-lg-flex row col-lg-2 " style={{"border-width": "1px",
                 "border-style": "outset",
                 "box-shadow": "2px 2px #888888",
-                "height":"50px"
+                "height":"50px",
+                "border-radius":"5px"
             }} >
                <div className="text-center p-0" style={{ "margin": "0 auto",
                    float: "none"}} > Sentiment </div>

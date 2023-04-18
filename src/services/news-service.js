@@ -12,6 +12,7 @@ export const findAllNews = async () => {
 export const findNewsByID = async (id1) => {
 
     const req = API_URL+id1+"?api_token="+TOKEN
+    //const req = BASE_URL+"/news/"+id1
     console.log("ID in service",req)
     const response = await axios.get(`${req}`);
     const news = response.data;

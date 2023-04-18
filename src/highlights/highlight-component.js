@@ -5,26 +5,24 @@ import {useSelector} from "react-redux";
 const HighlightComponent =  () => {
     const sidebar = useSelector((state) => state.sidebar)
 
-
-    const x =   sidebar.newsid
-    console.log("ID is",x)
-
-
-
-
     const [news, setNews] =useState([])
-    const news1 = (id1) => findNewsByID(id1).then(response =>  setNews(response))
-    // findNews(id)
-    news1(x)
 
-   // useEffect((x)=> {news1(x)},[])
 
-    return(<>
-        {sidebar.newsid}
-        {/*<ul className="list-group">*/}
-        {/*    {news.map((news) => news.highlights.map((item) => <li className="list-group-item mt-1 mb-1 rounded bg-light">{item.highlight}</li>))}*/}
-        {/*</ul>*/}
-    </>)
+
+   useEffect( () => {
+       findNewsByID(sidebar.newsid).then(response =>  setNews(response))
+   }, [sidebar.newsid])
+
+    return(  <div >
+        <span className="font-monospace fs-4">Highlights</span>
+
+        <ul className="list-group">
+
+            {news.map((news) => news.highlights.map((item) => <li className="list-group-item mt-1 mb-1 rounded bg-light fs-6"><div
+                dangerouslySetInnerHTML={{__html:item.highlight}}/></li>))}
+        </ul>
+
+    </div>)
 
 }
 
