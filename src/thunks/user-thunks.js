@@ -11,7 +11,12 @@ export const findAllUsersThunk = createAsyncThunk(
     }
 );
 
-
+export const updateUserThunk = createAsyncThunk(
+    "user/updateUser",
+    async (user) => {
+        return await userService.updateUser(user);
+    }
+);
 
 export const deleteUserThunk = createAsyncThunk(
     "user/deleteUser",
