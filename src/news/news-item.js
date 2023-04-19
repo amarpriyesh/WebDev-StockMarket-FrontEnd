@@ -30,10 +30,10 @@ const NewsItem = ({news = {"description"
 
             <img  src={news.image}  className=" rounded" height={80} width={100}
             />
-<div>
-            <span>Symbol:</span> <span className="fw-bold text-nowrap"> {news.symbol}
+            <div>
+                <span>Symbol:</span> <span className="fw-bold text-nowrap"> {news.symbol}
                </span>
-</div>
+            </div>
         </div>
 
 

@@ -28,6 +28,9 @@ const NavigationSidebar = (
                 <Link to="/search" className={`list-group-item bg-light ${active === 'search'?'active':''}`}>
                     <i className="fa fa-hashtag"></i>   Search
                 </Link>
+                <Link to="/views" className={`list-group-item bg-light ${active === 'view'?'active':''}`}>
+                    <i className="fa fa-envelope"></i>   View
+                </Link>
                 {currentUser &&(
                 <Link to="/profile" className={`list-group-item bg-light ${active === 'profile'?'active':''}`}>
                     <i className="fa fa-laptop"></i> Profile

@@ -3,6 +3,7 @@ const BASE_URL = process.env.REACT_APP_ENVIRONMENT==="TEST"? process.env.REACT_A
 const API_URL = process.env.REACT_APP_API_URL
 const TOKEN = process.env.REACT_APP_API_TOKEN
 
+
 export const findAllNews = async () => {
     const response = await axios.get(`${BASE_URL}/news`);
     const news = response.data;

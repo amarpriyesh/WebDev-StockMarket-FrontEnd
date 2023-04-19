@@ -9,6 +9,7 @@ import {
     profileThunk,
     googleLoginThunk
 } from "../thunks/auth-thunks";
+import {findUserById} from "../services/user-service";
 const initialState = {
     currentUser: null,
     allUsers: [],

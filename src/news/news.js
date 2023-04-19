@@ -62,7 +62,7 @@ const NewsComponent = () => {
             <ul className="list-group">
             {news.map(data => <NewsItem news={data} key={data._id}/>)}
             </ul>
-    </>
+        </>
 )
 
 
