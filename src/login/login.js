@@ -55,49 +55,57 @@ function LoginScreen() {
     };
     return (
         <div className="container">
-            <h1>
-                <button onClick={handleLogin} className="float-end btn btn-primary">
-                    Login
-                </button>
-                <div>
-                    <GoogleLogin
-                        clientId={clientId}
-                        buttonText="Login with Google"
-                        onSuccess={responseGoogle}
-                        onFailure={responseGoogle}
-                        cookiePolicy={'single_host_origin'}
-                    /></div>
-                Login Screen
-            </h1>
-            {error && (
-                <div className="alert alert-danger" role="alert">
-                    <pre>{error}</pre>
+            <div className="row justify-content-center mt-5">
+                <div className="col-md-6 col-lg-4">
+                    <div className="card shadow">
+                        <div className="card-body">
+                            <h2 className="text-center mb-4">Login</h2>
+
+                            <div className="form-group">
+                                <label htmlFor="email">Email</label>
+                                <input
+                                    className="form-control"
+                                    type="email"
+                                    id="email"
+                                    value={email}
+                                    onChange={(event) => setEmail(event.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="password">Password</label>
+                                <input
+                                    className="form-control"
+                                    type="password"
+                                    id="password"
+                                    value={password}
+                                    onChange={(event) => setPassword(event.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <button onClick={handleLogin} className="btn btn-primary btn-block">
+                                    Login
+                                </button>
+                                <GoogleLogin
+                                    className="btn btn-light btn-block mt-3"
+                                    clientId={clientId}
+                                    buttonText="Login with Google"
+                                    onSuccess={responseGoogle}
+                                    onFailure={responseGoogle}
+                                    cookiePolicy={"single_host_origin"}
+                                />
+                            </div>
+                            {error && (
+                                <div className="alert alert-danger mt-3" role="alert">
+                                    {error}
+                                </div>
+                            )}
+
+                        </div>
+                    </div>
                 </div>
-            )}
-            <div>
-                <label>Email</label>
-                <br />
-                <input
-                    className="form-control"
-                    type="text"
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                />
             </div>
-            <div>
-                <label>Password</label>
-                <input
-                    className="form-control"
-                    type="password"
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                />
-            </div>
-            {currentUser && (
-                <div>
-                    <h1>Welcome {currentUser.firstName} {currentUser.lastName}</h1>
-                </div>
-            )}
         </div>
     );
 }
