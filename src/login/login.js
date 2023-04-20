@@ -56,7 +56,8 @@ function LoginScreen() {
     return (
         <div className="container">
             <div className="row justify-content-center mt-5">
-                <div className="col-md-6 col-lg-4">
+                {/*<div className="col-md-6 col-lg-4">*/}
+                <div className="col-10">
                     <div className="card shadow">
                         <div className="card-body">
                             <h2 className="text-center mb-4">Login</h2>
