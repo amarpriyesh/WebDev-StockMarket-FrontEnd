@@ -60,9 +60,6 @@ function Profile() {
                             </div>
                         </div>
                     )}
-                    <Link to="/search" className="btn btn-primary">
-                        Search Results
-                    </Link>
                 </div>
             </div>
             {currentUser && currentUser.role==="ADMIN" && (

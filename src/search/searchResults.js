@@ -3,6 +3,7 @@ import {Link, useLocation, useParams} from "react-router-dom";
 import axios from "axios";
 import {setSidebar} from "../reducers/sidebar-reducer";
 import {useDispatch} from "react-redux";
+import NewsItem from "../news/news-item";
 
 function SearchResults() {
     const dispatch = useDispatch()
@@ -27,9 +28,10 @@ function SearchResults() {
         const queryParams = new URLSearchParams(location.search);
         const searchQuery = queryParams.get('q');
         if (searchQuery) {
-            axios.get(`https://api.example.com/search?q=${searchQuery}`)
+            axios.get(`https://api.marketaux.com/v1/news/all?symbols=${searchQuery}&filter_
+            entities=true&language=en&api_token=IKdLsrWdrAo18pM4p5DaEGSDDxgsugTVMnf5UDvs`)
                 .then(response => {
-                    setSearchResults(response.data);
+                    setSearchResults(response.data.data);
                 })
                 .catch(error => {
                     console.log(error);
@@ -38,13 +40,13 @@ function SearchResults() {
     };
 
     // Call the API on first render if there's a search query in the URL
-    React.useEffect(() => {
-        getSearchResults();
+    React.useEffect( () => {
+         getSearchResults();
     }, []);
 
     // Call the API whenever the search query changes
-    React.useEffect(() => {
-        getSearchResults();
+    React.useEffect( () => {
+         getSearchResults();
     }, [location.search]);
 
     return (
@@ -62,25 +64,10 @@ function SearchResults() {
                     <button className="btn btn-primary" type="submit">Search</button>
                 </div>
             </form>
-            {searchResults.length > 0 ?
+            {searchResults ?
                 <div>
-                    <p>Showing {searchResults.length} results for "{searchQuery}"</p>
                     <ul className="list-group">
-                        {searchResults.map(result => (
-                            <li className="list-group-item" key={result.id}>
-                                <Link to={`/results/${result.id}`}>
-                                    <div className="row">
-                                        <div className="col-md-3">
-                                            <img src={result.thumbnailUrl} alt={result.title} />
-                                        </div>
-                                        <div className="col-md-9">
-                                            <h4>{result.title}</h4>
-                                            <p>{result.description}</p>
-                                        </div>
-                                    </div>
-                                </Link>
-                            </li>
-                        ))}
+                        {searchResults.map(data => <NewsItem news={{_id:data.uuid,title:data.title,description:data.description,image:data.image_url,source:data.source,time:data.published_at,symbol:data.entities[0].symbol,company:data.entities[0].name,industry:data.entities[0].industry,sentiment:data.entities[0].sentiment_score}} key={data._id}/>)}
                     </ul>
                 </div> :
                 <div className="container">
