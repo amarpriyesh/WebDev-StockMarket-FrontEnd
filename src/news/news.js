@@ -34,7 +34,7 @@ const NewsComponent = () => {
 
     client.onmessage = (message) => {
        const  news1=JSON.parse(message.data)
-        console.log(news1)
+
        // console.log(  JSON.parse(message.data))
         /* const dataFromServer = message.map(data => JSON.parse(message.data));
          console.log('got reply ', dataFromServer )*/

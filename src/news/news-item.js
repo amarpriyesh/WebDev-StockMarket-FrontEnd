@@ -23,7 +23,7 @@ const NewsItem = ({news = {"description"
 
 }}) => {
     const dispatch = useDispatch();
-    const sidebar = useSelector(state => state.sidebar)
+   /* const sidebar = useSelector(state => state.sidebar)*/
 
     //onClick={() => dispatch(setSidebar({component:"news",newsid:news._id}))}
 
@@ -57,24 +57,25 @@ const NewsItem = ({news = {"description"
 
                 </div>
             </div>
-            <a href={"https://"+news.source}>@{news.source}</a>
+            <a style={{textDecoration: "none"}} href={"https://"+news.source}>@{news.source}</a>
             <div className="row">
             <div className="fw-bold col-10 mr-2 text-justify">{news.title}</div>
-            <div className="  d-none d-md-none d-lg-flex row col-lg-2 " style={{"border-width": "1px",
-                "border-style": "outset",
-                "box-shadow": "2px 2px #888888",
+            <div className="  d-none d-md-none d-lg-flex row col-lg-2 " style={{borderWidth: "1px",
+                borderStyle: "outset",
+                boxShadow: "2px 2px #888888",
                 "height":"50px",
-                "border-radius":"5px"
+                borderRadius:"5px"
             }} >
                <div className="text-center p-0" style={{ "margin": "0 auto",
                    float: "none"}} > Sentiment </div>
             <input style={{"width": "50px" , "margin": "0 auto",
-                float: "none"}} type="range" className="form-range" min="-1" max="1" id="customRange3"  value={news.sentiment}  />
+                float: "none"}} type="range" className="form-range" min="-1" max="1" id="customRange3"  value={news.sentiment} onChange={()=>{}}  />
             </div>
             </div>
             <div className=" text-justify">{news.description}</div>
-           <span> <i className="me-2 fa-regular fa-comment" onClick={() => {showComment?setShowComment(false):setShowComment(true)}}> </i> <i className="me-2 fa-regular fa-thumbs-up"> </i> </span>
-
+            <div className="row mt-2 mb-2">
+           <span> <i className="fa-regular fa-comment col-3" onClick={() => {showComment?setShowComment(false):setShowComment(true)}}> </i> <i className="fa-regular fa-thumbs-up col-3"/> <i className="fas fa-paste col-3"/> <i className="fas fa-link col-2" onClick={() => dispatch(setSidebar({component:"news",newsid:news._id}))}/> </span>
+            </div>
             {
                 showComment &&
                 <NewsComments newsID={news._id}/>
