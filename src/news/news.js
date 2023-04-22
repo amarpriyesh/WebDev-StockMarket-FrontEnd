@@ -34,7 +34,7 @@ const NewsComponent = () => {
 
     client.onmessage = (message) => {
        const  news1=JSON.parse(message.data)
-        console.log(news1)
+
        // console.log(  JSON.parse(message.data))
         /* const dataFromServer = message.map(data => JSON.parse(message.data));
          console.log('got reply ', dataFromServer )*/
@@ -48,7 +48,9 @@ const NewsComponent = () => {
 
     return(
         <>
-            <h4>News</h4>
+            <div className="flex-row
+            "><h4 className="font-monospace align-items-center">Market News</h4></div>
+
             <div className="input-group mb-3">
                 <input
                     type="text"
