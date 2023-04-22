@@ -8,12 +8,15 @@ import {setSidebar} from "../reducers/sidebar-reducer"
 import HighlightComponent from "../highlights/highlight-component"
 
 
+
+
 const SidebarComponent = () => {
     const sidebar = useSelector((state) => state.sidebar)
     console.log("SIDEBAR COMPONENT",sidebar.component)
 
     if (sidebar.component === "none") {
-        return (<Progress/>)
+
+        return (<><Progress/></>)
     }
 else if (sidebar.component === "news"){
         return( <HighlightComponent/>)

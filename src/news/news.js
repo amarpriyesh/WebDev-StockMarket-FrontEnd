@@ -48,7 +48,8 @@ const NewsComponent = () => {
 
     return(
         <>
-            <div className="flex-row"><h4 className="font-monospace align-items-center">Market News</h4></div>
+            <div className="flex-row
+            "><h4 className="font-monospace align-items-center">Market News</h4></div>
 
             <div className="input-group mb-3">
                 <input

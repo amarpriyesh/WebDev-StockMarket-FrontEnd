@@ -3,6 +3,10 @@ import Progress from "../progress/progress";
 import SidebarComponent from "../sidebar/sidebar";
 import {useDispatch,useSelector} from "react-redux";
 import {setSidebar} from "../reducers/sidebar-reducer"
+import NewsComponent from "./news";
+import NewsComments from "../news-comments/news-comments";
+import {useState} from "react";
+import CreateComment from "../news-comments/create-comment";
 
 const NewsItem = ({news = {"description"
 :
@@ -21,9 +25,13 @@ const NewsItem = ({news = {"description"
     const dispatch = useDispatch();
     const sidebar = useSelector(state => state.sidebar)
 
+    //onClick={() => dispatch(setSidebar({component:"news",newsid:news._id}))}
+
+    const [showComment, setShowComment] = useState(false)
+
     return(
 
-            <li className="list-group-item mt-1 mb-1 rounded bg-light" onClick={() => dispatch(setSidebar({component:"news",newsid:news._id}))}>
+            <li className="list-group-item mt-1 mb-1 rounded bg-light" >
     <div className="row" >
 
         <div className="d-none d-sm-none d-md-block col-2">
@@ -65,7 +73,13 @@ const NewsItem = ({news = {"description"
             </div>
             </div>
             <div className=" text-justify">{news.description}</div>
-        </div>
+           <span> <i className="me-2 fa-regular fa-comment" onClick={() => {showComment?setShowComment(false):setShowComment(true)}}> </i> <i className="me-2 fa-regular fa-thumbs-up"> </i> </span>
+
+            {
+                showComment &&
+                <NewsComments newsID={news._id}/>
+            }
+           </div>
         </div>
             </li>
 
