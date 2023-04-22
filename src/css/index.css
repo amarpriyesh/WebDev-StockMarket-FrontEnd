@@ -99,3 +99,20 @@
 .wd-text-color-black {
     color: black;
 }
+
+.wd-view-title {
+    font-size:15px;
+    color: dimgrey;
+    font-weight: bold;
+}
+
+.wd-author {
+    font-size:14px;
+    color: dimgrey;
+}
+
+.wd-username-view {
+    font-size:16px;
+    text-decoration: none;
+    color: black;
+}

@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+    addViewCommentThunk,
     createViewCommentThunk,
-    createViewThunk,
+    createViewThunk, deleteViewCommentThunk,
     deleteViewThunk,
     findAllViewsThunk,
     updateViewThunk
@@ -21,6 +22,7 @@ const viewSlice = createSlice({
     extraReducers : {
         [findAllViewsThunk.fulfilled]:
             (state, { payload }) => {
+                console.log(payload, "Inside the view reducer")
                 state.view = payload
             },
         [findAllViewsThunk.rejected]:
@@ -49,7 +51,8 @@ const viewSlice = createSlice({
                 const viewNdx = state.view
                     .findIndex((t) => t._id === payload._id)
                 state.view[viewNdx] = {
-                    ...state.view[viewNdx]
+                    ...state.view[viewNdx],
+                    ...payload
                 }
             },
 
@@ -61,6 +64,37 @@ const viewSlice = createSlice({
                 state.view[viewNdx] = {
                     ...state.view[viewNdx],
                     ...payload
+                }
+            },
+        [addViewCommentThunk.fulfilled]:
+            (state, { payload }) => {
+                let index = state.view.findIndex(t => t._id === payload._id)
+                //let temp = state.view[index].comment
+                state.view[index].comment.push(payload.comment[payload.comment.length - 1])
+                state.view[index].messageCount = payload.comment.length
+                let s = state
+            },
+            // (state, { payload }) => {
+            //     const viewNdx = state.view.view
+            //         .findIndex((t) => t._id === payload._id)
+            //     state.view[viewNdx] = {
+            //         ...state.view[viewNdx],
+            //         ...payload
+            //
+            //     //state.view[viewNdx].comment = payload.comment
+            //     }
+            // },
+
+        [deleteViewCommentThunk.fulfilled]:
+            (state, { payload }) => {
+                state.loading = false
+                const viewNdx = state.view
+                    .findIndex((t) => t._id === payload._id)
+                state.view[viewNdx] = {
+                    ...state.view[viewNdx],
+                    ...payload
+
+                    //state.view[viewNdx].comment = payload.comment
                 }
             },
 

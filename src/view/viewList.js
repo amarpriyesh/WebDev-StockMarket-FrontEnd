@@ -9,16 +9,18 @@ import NewsItem from "../news/news-item";
 
 const ViewList = () => {
 
-    //const [views, setViews] =useState([])
     const views = useSelector((state) => state.view);
+    //const [views, setViews] =useState(viewsN)
     const dispatch = useDispatch();
-
-   /* const [views,setViews]=useState(view)*/
 
     useEffect(() => {
         dispatch(findAllViewsThunk())
 
     }, [])
+
+   /* const [views,setViews]=useState(view)*/
+
+
 
     //
     // const findViews = () => findAllViews().then(response =>  setViews(response))
@@ -30,8 +32,7 @@ const ViewList = () => {
             <ul className="list-group">
                 {
                     views.view.map && views.view.map(view =>
-                        <ViewListItem key={view._id}
-                                      view={view}/>)
+                        <ViewListItem key={view._id} view={view}/>)
                 }
             </ul>
         </>
