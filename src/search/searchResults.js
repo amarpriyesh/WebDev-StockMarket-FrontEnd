@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setSidebar } from '../reducers/sidebar-reducer';
@@ -10,6 +10,13 @@ function SearchResults() {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchType, setSearchType] = useState('symbols');
     const [searchResults, setSearchResults] = useState([]);
+
+    useEffect(() => {
+        const savedSearchResults = localStorage.getItem('searchResults');
+        if (savedSearchResults) {
+            setSearchResults(JSON.parse(savedSearchResults));
+        }
+    }, []);
 
     const handleSearch = (event) => {
         event.preventDefault();
@@ -35,6 +42,7 @@ function SearchResults() {
                 .get(apiUrl)
                 .then((response) => {
                     setSearchResults(response.data.data);
+                    localStorage.setItem('searchResults', JSON.stringify(response.data.data));
                 })
                 .catch((error) => {
                     console.log(error);
