@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import {useDispatch} from "react-redux";
+import {setSidebar} from "../reducers/sidebar-reducer";
 
 const containerStyle = {
     fontFamily: 'Arial, sans-serif',
@@ -38,24 +40,7 @@ const cursorStyle = {
     animation: 'blink 1s steps(2, start) infinite',
 };
 
-const useTypingEffect = (text, typingSpeed) => {
-    const [typedText, setTypedText] = useState('');
 
-    useEffect(() => {
-        let timer;
-        const typeCharacter = (currentIndex) => {
-            if (currentIndex < text.length) {
-                setTypedText((prevTypedText) => prevTypedText + text.charAt(currentIndex));
-                timer = setTimeout(() => typeCharacter(currentIndex + 1), typingSpeed);
-            }
-        };
-
-        typeCharacter(0);
-        return () => clearTimeout(timer); // Clear timer on unmount
-    }, [text, typingSpeed]);
-
-    return typedText;
-};
 
 const Home = () => {
     const text = 'StockMarketNews is a cutting-edge web platform designed to provide users with ' +
@@ -66,7 +51,32 @@ const Home = () => {
         'search functionality using Remote API, regular updates from the MarketAux API,' +
         'news and search access to anonymous users, option to comment and provide views to logged in users.';
     const typingSpeed = 50;
+
+    const useTypingEffect = (text, typingSpeed) => {
+        const [typedText, setTypedText] = useState('');
+
+        useEffect(() => {
+            let timer;
+            const typeCharacter = (currentIndex) => {
+                if (currentIndex < text.length) {
+                    setTypedText((prevTypedText) => prevTypedText + text.charAt(currentIndex));
+                    timer = setTimeout(() => typeCharacter(currentIndex + 1), typingSpeed);
+                }
+            };
+
+            typeCharacter(0);
+            dispatch(setSidebar({component:"none",newsid:"ddd"}));
+            return () => clearTimeout(timer); // Clear timer on unmount
+        }, [text, typingSpeed]);
+
+        return typedText;
+    };
+
+
+
     const typedText = useTypingEffect(text, typingSpeed);
+    const dispatch = useDispatch();
+
 
     return (
         <>
