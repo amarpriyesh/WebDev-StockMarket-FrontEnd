@@ -21,7 +21,7 @@ function Profile() {
         dispatch(setSidebar({component:"none",newsid:"ddd"}));
         dispatch(profileThunk());
         setProfile(currentUser)
-        dispatch(findAllUsersThunk());
+        // dispatch(findAllUsersThunk());
     }, [currentUser] );
 
     return (

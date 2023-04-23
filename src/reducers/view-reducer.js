@@ -22,7 +22,6 @@ const viewSlice = createSlice({
     extraReducers : {
         [findAllViewsThunk.fulfilled]:
             (state, { payload }) => {
-                console.log(payload, "Inside the view reducer")
                 state.view = payload
             },
         [findAllViewsThunk.rejected]:

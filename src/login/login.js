@@ -5,6 +5,8 @@ import { loginThunk,googleLoginThunk } from "../thunks/auth-thunks";
 import { useSelector } from "react-redux";
 import {GoogleLogin,GoogleLogout} from "react-google-login";
 import {setSidebar} from "../reducers/sidebar-reducer";
+import {createNewUserAction} from "../services/user-action-service.js";
+import {findUserByEmail} from "../services/user-service";
 
 function LoginScreen() {
     const {currentUser} = useSelector((state) => state.user);
@@ -42,6 +44,31 @@ function LoginScreen() {
 
         console.log('Logged In', currentUser);
 
+        let userId = ""
+
+        await findUserByEmail(user.email).then(res => {
+                console.log("Find User by email -", res)
+                userId = res._id
+            }
+
+        )
+
+        let newUserAction = {
+            userId: userId,
+            username: user.username,
+            role: "REGISTERED",
+            likedNews: [],
+            likedView: [],
+            postedView: [],
+        }
+
+        console.log('Creating new user Action -', newUserAction);
+
+        createNewUserAction(newUserAction).then(res => {
+                console.log( "Created new user Action", res)
+            }
+        )
+
     }
 
     const handleLogin =  async () => {
@@ -50,6 +77,23 @@ function LoginScreen() {
             setError("Incorrect credentials");
             navigate("/login")
         } else {
+            console.log(response)
+
+            let newUserAction = {
+                userId: response.payload._id,
+                username: response.payload.username,
+                role: response.payload.role,
+                likedNews: [],
+                likedView: [],
+                postedView: [],
+            }
+
+            console.log('Creating new user Action -', newUserAction);
+
+            createNewUserAction(newUserAction).then(res => {
+                    console.log( "Created new user Action", res)
+                }
+            )
             navigate("/");
         }
     };

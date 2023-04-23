@@ -37,7 +37,7 @@ export default function ViewComment ({comment, viewId, setComment, setCommentCou
 
     return(
         <>
-            <li className= {comment.username !== currentUser.username ? "list-group-item mb-3 rounded bg-light me-5" : "list-group-item mb-3 rounded bg-light ms-5"}>
+            <li className= {(currentUser && comment.username === currentUser.username) ? "list-group-item mb-3 rounded bg-light ms-5" : "list-group-item mb-3 rounded bg-light me-5"}>
                 <div className="row">
                     {/*{*/}
                     {/*    comment.username === currentUser.username &&*/}

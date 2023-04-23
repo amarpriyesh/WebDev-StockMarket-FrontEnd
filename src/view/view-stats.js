@@ -11,6 +11,13 @@ import PopupComment from "./comment/popup-comment.js"
 import CreateComment from "./comment/create-comment";
 import ViewComment from "./comment/view-comment";
 import AddComment from "./comment/add-comment";
+import {addViewLikeByUser, findAllLikedViewsByUser, removeLikeViewFromUser} from "../services/user-action-service";
+import {
+    decreaseViewLikeCount, getViewLikeCount,
+    increaseViewLikeCount,
+    updateViewCommentCount,
+    updateViewLikeCount
+} from "../services/views-service";
 const ViewStats = ({view, setView}) => {
     let view2 = (useSelector((state) => state.view.view))
     view = view2.find(item => item._id === view._id)
@@ -45,32 +52,48 @@ const ViewStats = ({view, setView}) => {
 
     const [dislikedBy,setDislikedBy] = useState(view.dislikedBy)
 
+    const [liked,setLiked] = useState(false)
+
 
     const handleLikes =() =>{
 
         if( !currentUser) {return}
-        let alreadyLiked = likedBy.indexOf(currentUser._id) > -1;
-        if (alreadyLiked) {return}
 
-        let alreadyDisliked = dislikedBy.indexOf(currentUser._id) > -1;
-        let temp = [...likedBy];
-        temp.push(currentUser._id);
-        setLikedBy(temp);
+        findAllLikedViewsByUser(currentUser._id).then(res => {
+            console.log("Inside Like Cliked - ", res)
+            let index = res[0].likedView.findIndex(t => t.viewId === view._id)
+            // console.log("Index ", index)
+            if (index !== -1) {
+                // Current User already liked view
+                removeLikeViewFromUser(currentUser._id, view._id).then(res => {
+                    // console.log("removed new like ", res)
+                })
 
-        setLikesCount(temp.length);
+                decreaseViewLikeCount(view._id).then()
+
+                setLikesCount(likesCount - 1)
+                setLiked(false)
+            } else {
+                // Current User hasn't liked view yet
+                let newViewLiked = {
+                    "viewId": view._id,
+                    "dateLiked": new Date()
+                }
+                addViewLikeByUser(currentUser._id, newViewLiked).then(res => {
+                    // console.log("added new like ", res)
+                })
 
 
+                increaseViewLikeCount(view._id).then()
 
-        let temp2 = [...dislikedBy];
-        if (alreadyDisliked) {
-            setDislikesCount(dislikesCount - 1);
-            temp2 = (temp2.filter(item => item !== currentUser._id));
-            setDislikedBy(temp2)
-        }
+                setLikesCount(likesCount + 1)
+                setLiked(true)
+            }
+        })
 
 
         //console.log(flag);
-        dispatch(createViewCommentThunk({...view,likes: likesCount, dislikes:dislikesCount, likedBy:temp, dislikedBy: temp2}))
+        //dispatch(createViewCommentThunk({...view,likes: likesCount, dislikes:dislikesCount, likedBy:temp, dislikedBy: temp2}))
         //setView({...view,likes: likesCount, dislikes:dislikesCount, likedBy:likedBy, dislikedBy: dislikedBy})
     }
 
@@ -174,20 +197,10 @@ const ViewStats = ({view, setView}) => {
                         {
                             <div className="pe-5 wd-float-left">
                                 <i onClick={() => handleLikes()}
-                                   className="fa-solid fa-thumbs-up"></i>
+                                   className={liked ? "fa-solid fa-thumbs-up" : "fa-regular fa-thumbs-up"} ></i>
                                 {likesCount}
                             </div>
                         }
-                        {
-                            <div className=" pe-5 wd-float-left">
-                                <span onClick={handleDislikes}>
-                                <i
-                                   className="fa-solid fa-thumbs-down"></i>
-                                {dislikesCount}
-                                    </span>
-                            </div>
-                        }
-                        {view && view.likes}
                     </span>
 
                 </a>

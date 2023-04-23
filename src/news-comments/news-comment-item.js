@@ -9,6 +9,7 @@ const NewsCommentItem = ({comment, deleteComment, updateComment}) => {
     const [stateEdit, setStateEdit] = useState(false)
     const [commentInitial, setCommentInitial] = useState(comment.comment)
     const { currentUser } = useSelector((state) => state.user);
+    console.log("USERS COMPARE",currentUser,comment.user._id)
 
 
 
@@ -24,6 +25,7 @@ const NewsCommentItem = ({comment, deleteComment, updateComment}) => {
             />
         </div>
         <div className="col-10">
+
             <div><Link style={{textDecoration: "none"}}  to={`/profile/${comment.user._id}`}>{comment.user.firstName}</Link>{ currentUser && currentUser._id===comment.user._id && <i className="me-1 mt-2 fas fa-remove   float-end" onClick={() => deleteComment(comment._id)}/> } </div>
             <div>{!stateEdit && currentUser && currentUser._id===comment.user._id && <i className=" mt-2 fas fa-pencil float-end" onClick={() => stateEdit?setStateEdit(false):setStateEdit(true)}/>}
                 {stateEdit && <i className=" fas fa-save float-end" onClick={() => {stateEdit?setStateEdit(false):setStateEdit(true)

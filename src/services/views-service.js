@@ -1,6 +1,8 @@
 import axios from "axios";
-const BASE_URL = "http://localhost:4000/api";
+
+const BASE_URL = process.env.REACT_APP_ENVIRONMENT==="TEST"? process.env.REACT_APP_BASE_URL_TEST: process.env.REACT_APP_BASE_URL_PRODUCTION
 const NEWS_URL = `${BASE_URL}/views`;
+
 // console.log("NEWS_URL", NEWS_URL);
 
 export const findAllViews = async () => {
@@ -52,10 +54,34 @@ export const updateViewCommentCount = async (viewId, count) => {
     return response.data;
 }
 
+export const updateViewLikeCount = async (viewId, count) => {
+    const response = await axios
+        .put(`${NEWS_URL}/like/count/${viewId}/${count}`);
+    return response.data;
+}
+
+export const increaseViewLikeCount = async (viewId) => {
+    const response = await axios
+        .put(`${NEWS_URL}/like/increase/${viewId}`);
+    return response.data;
+}
+
+export const decreaseViewLikeCount = async (viewId) => {
+    const response = await axios
+        .put(`${NEWS_URL}/like/decrease/${viewId}`);
+    return response.data;
+}
 
 export const deleteView = async (viewId) => {
     const response = await axios
         .delete(`${NEWS_URL}/${viewId}`);
     return response.data;
 }
+
+export const getViewLikeCount = async (viewId) => {
+    const response = await axios.get(`${NEWS_URL}/like/${viewId}`);
+    return response.data;
+};
+
+
 

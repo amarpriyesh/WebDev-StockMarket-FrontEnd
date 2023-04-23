@@ -1,7 +1,7 @@
 import React, { useState} from "react";
 import { useSelector} from "react-redux";
 
-import {addViewComment, findAllViewComments} from "../../services/views-service";
+import {addViewComment, findAllViewComments, updateViewCommentCount} from "../../services/views-service";
 
 function AddComment({view, setComment, setCommentCount}) {
     let [newComment, setNewComment] = useState('');
@@ -23,10 +23,13 @@ function AddComment({view, setComment, setCommentCount}) {
 
         addViewComment(view._id, newCommentAdd).then(res =>
             {
-                console.log("COMMENT CREATED",res)
+
                 findAllViewComments(view._id).then(data => {
                     setComment(data[0].comment)
-                    setCommentCount(data[0].comment.length)})
+                    setCommentCount(data[0].comment.length)
+
+                    updateViewCommentCount(view._id, data[0].comment.length).then()
+                })
 
             })
     }
