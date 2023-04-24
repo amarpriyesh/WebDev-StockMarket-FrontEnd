@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, Route} from "react-router-dom";
 import {profileThunk} from "../thunks/auth-thunks";
 import {useDispatch} from "react-redux";
 import {setSidebar} from "../reducers/sidebar-reducer";
+import {Routes} from "react-router";
+import View from "../view/view";
 
 
 function Home() {
@@ -61,6 +63,7 @@ function Home() {
                     )}
                 </div>
             )}
+
         </div>
     );
 }

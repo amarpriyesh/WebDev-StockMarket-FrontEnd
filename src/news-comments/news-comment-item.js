@@ -9,13 +9,15 @@ const NewsCommentItem = ({comment, deleteComment, updateComment}) => {
     const [stateEdit, setStateEdit] = useState(false)
     const [commentInitial, setCommentInitial] = useState(comment.comment)
     const { currentUser } = useSelector((state) => state.user);
+    console.log("currentUser",currentUser)
+    console.log("commentUser",comment.user)
 
 
 
 
     return(<div className="row me-1">
 
-       <div className={currentUser && currentUser._id!==comment.user._id?"col-2":"col-0"}></div><li className= {currentUser && currentUser._id!==comment.user._id? "list-group-item mt-1 mb-1 rounded bg-light float-end col-10":"list-group-item mt-1 mb-1  rounded bg-light col-10 float-end"} >
+       <div className={currentUser && currentUser._id!==comment.user._id?"col-2":"col-0"}> </div><li className= {currentUser && currentUser._id!==comment.user._id? "list-group-item mt-1 mb-1 rounded bg-light float-end col-10":"list-group-item mt-1 mb-1  rounded bg-light col-10 float-end"} >
 
         <div className={currentUser && currentUser._id===comment.user._id?"col-2":"col-0"}></div>
         <div className="row bg-light">

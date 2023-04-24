@@ -1,12 +1,16 @@
-import {Link, useParams} from "react-router-dom";
+import {Link, Route, useLocation, useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {findUserById} from "../services/user-service";
 import {logoutThunk} from "../thunks/auth-thunks";
 import UserList from "../profile/user-list";
 import "../profile/profile.css"
+import {Routes} from "react-router";
+import View from "../view/view";
+import NewsCommentsOther from "./news-comments-other";
 
 function OtherProfile() {
   const {id} = useParams();
+    const location = useLocation();
   const [user, setUser] = useState({});
   const fetchUser = async () => {
     const response = await findUserById(id);
@@ -39,6 +43,28 @@ function OtherProfile() {
               )}
             </div>
           </div>
+            <ul className="nav nav-pills mb-2">
+                <li className="nav-item">
+                    <Link to={`/profile/${id}/comments`}  className={`nav-link ${location.pathname.indexOf("/comments") >= 0 ? 'active':''}`}>Commented News</Link>
+                </li>
+                <li className="nav-item">
+                    <Link to={`/profile/${id}/likes`}  className={`nav-link ${location.pathname.indexOf("/likes") >= 0 ? 'active':''}`}>Liked News</Link>
+                </li>
+                <li className="nav-item">
+                    <Link to={`/profile/${id}/dislikes`}  className={`nav-link ${location.pathname.indexOf("/dislikes") >= 0 ? 'active':''}`}>Disliked News</Link>
+                </li>
+                <li className="nav-item">
+                    <Link to={`/profile/${id}/tags`}  className={`nav-link ${location.pathname.indexOf("/tags") >= 0 ? 'active':''}`}>Tagged Views</Link>
+
+                </li>
+            </ul>
+            <Routes>
+                <Route path={`/`} element={<NewsCommentsOther id={id}/>}/>
+                <Route path={`/comments`} element={<NewsCommentsOther id={id}/>}/>
+                <Route path={`/likes`} element={""}/>
+                <Route path={`/dislikes`} element={""}/>
+                <Route path={`/tags`} element={""}/>
+            </Routes>
         </div>
   );
 }

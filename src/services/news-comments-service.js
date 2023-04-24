@@ -36,3 +36,10 @@ export const findNewsByID = async (id1) => {
     const news = response.data;
     return news.entities;
 };
+
+export const findNewsByUserID = async (id) => {
+    const response = await axios.get(`${BASE_URL}/news/comments/user/${id}`);
+    const news = response.data;
+    return news;
+
+};
