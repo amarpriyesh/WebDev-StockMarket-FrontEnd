@@ -19,8 +19,8 @@ import {
     updateViewLikeCount
 } from "../services/views-service";
 const ViewStats = ({view, setView}) => {
-    let view2 = (useSelector((state) => state.view.view))
-    view = view2.find(item => item._id === view._id)
+    // let view2 = (useSelector((state) => state.view.view))
+    // view = view2.find(item => item._id === view._id)
 
     const dispatch = useDispatch();
     const likeView = () => {
@@ -60,7 +60,6 @@ const ViewStats = ({view, setView}) => {
         if( !currentUser) {return}
 
         findAllLikedViewsByUser(currentUser._id).then(res => {
-            console.log("Inside Like Cliked - ", res)
             let index = res[0].likedView.findIndex(t => t.viewId === view._id)
             // console.log("Index ", index)
             if (index !== -1) {
@@ -180,9 +179,6 @@ const ViewStats = ({view, setView}) => {
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
                             Close
-                        </Button>
-                        <Button variant="primary" onClick={handleClose}>
-                            Save Changes
                         </Button>
                     </Modal.Footer>
                 </Modal>

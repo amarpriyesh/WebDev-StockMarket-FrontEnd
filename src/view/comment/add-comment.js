@@ -2,6 +2,7 @@ import React, { useState} from "react";
 import { useSelector} from "react-redux";
 
 import {addViewComment, findAllViewComments, updateViewCommentCount} from "../../services/views-service";
+import {createViewComment} from "../../services/view-comments-service";
 
 function AddComment({view, setComment, setCommentCount}) {
     let [newComment, setNewComment] = useState('');
@@ -32,6 +33,12 @@ function AddComment({view, setComment, setCommentCount}) {
                 })
 
             })
+
+        createViewComment({views : view, user: currentUser._id, date: new Date(), comment: newComment}).then(res =>
+            console.log("inside comment add",res)
+        )
+
+        setNewComment('')
     }
 
 

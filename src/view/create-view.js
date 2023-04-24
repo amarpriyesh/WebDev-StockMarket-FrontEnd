@@ -47,7 +47,7 @@ const CreateView = () => {
                         <img referrerPolicy="no-referrer" src={currentUser.profilePhoto} width={60}/>
                     </div>
                     <div className="col-10">
-                        <input  className="form-control border-0" type="text" placeholder="Title"
+                        <input value={title}  className="form-control border-0" type="text" placeholder="Title"
                                 onChange={(event) => setTitle(event.target.value)}
                         />
                         <textarea value={newView} placeholder="My View . . ."

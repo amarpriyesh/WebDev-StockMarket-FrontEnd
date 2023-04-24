@@ -7,6 +7,7 @@ import "../profile/profile.css"
 import {Routes} from "react-router";
 import View from "../view/view";
 import NewsCommentsOther from "./news-comments-other";
+import MyViews from "./my-views";
 
 function OtherProfile() {
   const {id} = useParams();
@@ -55,7 +56,15 @@ function OtherProfile() {
                 </li>
                 <li className="nav-item">
                     <Link to={`/profile/${id}/tags`}  className={`nav-link ${location.pathname.indexOf("/tags") >= 0 ? 'active':''}`}>Tagged Views</Link>
-
+                </li>
+                <li className="nav-item">
+                    <Link to={`/profile/${id}/view/created`}  className={`nav-link ${location.pathname.indexOf("/view/created") >= 0 ? 'active':''}`}>Created Views</Link>
+                </li>
+                <li className="nav-item">
+                    <Link to={`/profile/${id}/view/likes`}  className={`nav-link ${location.pathname.indexOf("/view/likes") >= 0 ? 'active':''}`}>Liked Views</Link>
+                </li>
+                <li className="nav-item">
+                    <Link to={`/profile/${id}/view/comments`}  className={`nav-link ${location.pathname.indexOf("/view/comments") >= 0 ? 'active':''}`}>Commented Views</Link>
                 </li>
             </ul>
             <Routes>
@@ -64,6 +73,9 @@ function OtherProfile() {
                 <Route path={`/likes`} element={""}/>
                 <Route path={`/dislikes`} element={""}/>
                 <Route path={`/tags`} element={""}/>
+                <Route path={`/view/created`} element={<MyViews id={id}/>}/>
+                <Route path={`/view/likes`} element={""}/>
+                <Route path={`/view/comments`} element={""}/>
             </Routes>
         </div>
   );

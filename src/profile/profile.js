@@ -86,7 +86,7 @@ function Profile() {
                                     <a className="nav-link">News</a>
                                 </li>
                             </ul>
-                            <LikedViews/>
+                            {/*<LikedViews/>*/}
 
                         </div>
                     </>

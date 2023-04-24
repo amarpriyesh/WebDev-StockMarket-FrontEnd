@@ -6,7 +6,8 @@ import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import '../css/index.css';
 
-const ViewListItem = ({view, key}) => {
+const ViewListItem = ({view, key, findAllViews}) => {
+
     const dispatch = useDispatch();
 
 
@@ -14,12 +15,16 @@ const ViewListItem = ({view, key}) => {
 
     const {newView, setNewView} = useState(view);
 
-    let view2 = (useSelector((state) => state.view.view))
-    view = view2.find(item => item._id === view._id)
+    // let view2 = (useSelector((state) => state.view.view))
+    // view = view2.find(item => item._id === view._id)
 
 
     const deleteViewHandler = (id) => {
         dispatch(deleteViewThunk(id));
+        if (findAllViews) {
+            findAllViews();
+            findAllViews();
+        }
     }
 
     return(
@@ -42,7 +47,7 @@ const ViewListItem = ({view, key}) => {
                 </div>
 
                 <div className="col-1">
-                    {currentUser && currentUser.username === view.username &&
+                    {currentUser && currentUser._id === view.userId &&
                     <i onClick={() => deleteViewHandler(view._id)} className="fas fa-remove fa-2x fa-pull-right"></i>
                     }
                 </div>
