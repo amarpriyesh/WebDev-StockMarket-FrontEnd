@@ -78,7 +78,7 @@ const NewsItem = ({news = {"description"
             </div>
             {
                 showComment &&
-                <NewsComments newsID={news._id}/>
+                <NewsComments news={news}/>
             }
            </div>
         </div>

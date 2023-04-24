@@ -42,7 +42,7 @@ function App() {
                   <Route path="/views" element={<View/>}/>
                   <Route path="/profile" element={<Profile/>}/>
                   <Route path="/editProfile" element={<EditProfile/>}/>
-                  <Route path="/profile/:id" element={<OtherProfile/>}/>
+                  <Route path="/profile/:id/*" element={<OtherProfile/>}/>
                   <Route path="/search/:searchCriteria" element={<SearchResults/>} />
                   <Route path="/search" element={<SearchResults/>} />
                   <Route path="/details/:id" element={<Details/>} />
