@@ -3,6 +3,9 @@ import {w3cwebsocket as W3CWebSocket} from "websocket"
 import React from "react";
 import {useState,useEffect} from "react";
 import {findAllNews} from "../services/news-service"
+import {Link, Route} from "react-router-dom";
+import {Routes} from "react-router";
+import View from "../view/view";
 const client = new W3CWebSocket('ws://127.0.0.1:8000');
 
 
@@ -48,6 +51,7 @@ const NewsComponent = () => {
 
     return(
         <>
+
             <div className="flex-row
             "><h4 className="font-monospace align-items-center">Market News</h4></div>
 
@@ -60,6 +64,7 @@ const NewsComponent = () => {
                 />
                 <button className="btn btn-primary rounded ml-2" type="submit">Search</button>
             </div>
+
             <ul className="list-group">
             {news.map(data => <NewsItem news={data} key={data._id}/>)}
             </ul>
