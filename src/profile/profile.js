@@ -7,6 +7,7 @@ import "./profile.css"
 import UserList from "./user-list";
 import {useNavigate} from "react-router";
 import {setSidebar} from "../reducers/sidebar-reducer";
+import LikedViews from "./liked-views";
 
 function Profile() {
 
@@ -17,12 +18,12 @@ function Profile() {
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
-    useEffect( () => {
-        dispatch(setSidebar({component:"none",newsid:"ddd"}));
-        dispatch(profileThunk());
-        setProfile(currentUser)
-        // dispatch(findAllUsersThunk());
-    }, [currentUser] );
+    // useEffect( () => {
+    //     dispatch(setSidebar({component:"none",newsid:"ddd"}));
+    //     dispatch(profileThunk());
+    //     setProfile(currentUser)
+    //     dispatch(findAllUsersThunk());
+    // }, [currentUser] );
 
     return (
         <div className="container">
@@ -69,6 +70,30 @@ function Profile() {
                 </div>
             )
             }
+
+            {
+                currentUser && (
+                    <>
+                        <div>
+                            <ul className="nav nav-pills mb-2">
+                                <li className="nav-item">
+                                    <a className="nav-link active">For You</a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link">Trending</a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link">News</a>
+                                </li>
+                            </ul>
+                            <LikedViews/>
+
+                        </div>
+                    </>
+                )
+            }
+
+
         </div>
     );
 }

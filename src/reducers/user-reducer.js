@@ -33,9 +33,9 @@ const userSlice = createSlice({
         [registerThunk.fulfilled]: (state, { payload }) => {
             state.currentUser = null;
         },
-        // [findAllUsersThunk.fulfilled]: (state,{payload}) => {
-        //     state.allUsers = payload;
-        // },
+        [findAllUsersThunk.fulfilled]: (state,{payload}) => {
+            state.allUsers = payload;
+        },
         [updateUserThunk.fulfilled]: (state, { payload }) => {
             state.currentUser = payload;
         }
