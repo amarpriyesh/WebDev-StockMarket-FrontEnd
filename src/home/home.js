@@ -1,71 +1,110 @@
-import React, {useEffect, useState} from 'react';
-import {Link, Route} from "react-router-dom";
-import {profileThunk} from "../thunks/auth-thunks";
+import React, { useState, useEffect } from 'react';
 import {useDispatch} from "react-redux";
 import {setSidebar} from "../reducers/sidebar-reducer";
-import {Routes} from "react-router";
-import View from "../view/view";
+
+const containerStyle = {
+    fontFamily: 'Arial, sans-serif',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '20px',
+};
+
+const titleStyle = {
+    fontSize: '2.5rem',
+    fontWeight: 700,
+    marginBottom: '20px',
+};
+
+const subtitleStyle = {
+    fontSize: '1.5rem',
+    fontWeight: 400,
+    marginBottom: '40px',
+};
+
+const typingContainerStyle = {
+    fontSize: '1rem',
+    whiteSpace: 'pre-wrap',
+    wordWrap: 'break-word',
+    width: '55vw',
+    border: '1px solid #ccc',
+    padding: '20px 40px',
+    borderRadius: '5px',
+    marginBottom: '40px',
+    justifyContent: 'center',
+    backgroundColor: '#f5f5f5',
+};
+
+const cursorStyle = {
+    animation: 'blink 1s steps(2, start) infinite',
+};
 
 
-function Home() {
-    const [latestData, setLatestData] = useState([]);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [userData, setUserData] = useState([]);
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(profileThunk());
-        dispatch(setSidebar({component:"none",newsid:"ddd"}));
-    }, []);
 
-    const fetchData = async () => {
-        try {
-            const latestData = await fetch('/api/latestData');
-            const userData = await fetch('/api/userData');
-            setLatestData(latestData);
-            setUserData(userData);
-            setIsLoggedIn(true); // assuming user data is only returned when logged in
-        } catch (error) {
-            console.log('Error fetching data:', error);
-        }
+const Home = () => {
+    const text = 'StockMarketNews is a cutting-edge web platform designed to provide users with ' +
+        'real-time stock market news and insights. By leveraging the powerful APIs ' +
+        'offered by MarketAux.com, StockMarketNews aims to deliver up-to-the-minute financial ' +
+        'data, expert analysis, and market trends to both individual investors and ' +
+        'financial professionals. In addition, StockMarketNews provides CRUD operations on user management,' +
+        'search functionality using Remote API, regular updates from the MarketAux API,' +
+        'news and search access to anonymous users, option to comment and provide views to logged in users.';
+    const typingSpeed = 50;
+
+    const useTypingEffect = (text, typingSpeed) => {
+        const [typedText, setTypedText] = useState('');
+
+        useEffect(() => {
+            let timer;
+            const typeCharacter = (currentIndex) => {
+                if (currentIndex < text.length) {
+                    setTypedText((prevTypedText) => prevTypedText + text.charAt(currentIndex));
+                    timer = setTimeout(() => typeCharacter(currentIndex + 1), typingSpeed);
+                }
+            };
+
+            typeCharacter(0);
+            dispatch(setSidebar({component:"none",newsid:"ddd"}));
+            return () => clearTimeout(timer); // Clear timer on unmount
+        }, [text, typingSpeed]);
+
+        return typedText;
     };
 
-    return (
-        <div className="container home-page">
-            <h1 className="text-center">Welcome to my website</h1>
-            {isLoggedIn ? (
-                <div className="user-content">
-                    <h2>Your latest activity</h2>
-                    {userData.length > 0 ? (
-                        <ul className="list-group">
-                            {userData.map((data) => (
-                                <li key={data.id} className="list-group-item">
-                                    <Link to={`/posts/${data.id}`}>{data.title}</Link>
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p>No activity to show</p>
-                    )}
-                </div>
-            ) : (
-                <div className="generic-content">
-                    <h2>Latest content</h2>
-                    {latestData.length > 0 ? (
-                        <ul className="list-group">
-                            {latestData.map((data) => (
-                                <li key={data.id} className="list-group-item">
-                                    <Link to={`/posts/${data.id}`}>{data.title}</Link>
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p>No content to show</p>
-                    )}
-                </div>
-            )}
 
-        </div>
+
+    const typedText = useTypingEffect(text, typingSpeed);
+    const dispatch = useDispatch();
+
+
+    return (
+        <>
+            <style>
+                {`
+        @keyframes blink {
+          0% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+        `}
+            </style>
+            <div style={containerStyle}>
+                <h1 style={titleStyle}>StockMarketNews</h1>
+                <h2 style={subtitleStyle}>Real-time Stock Market News and Insights</h2>
+                <div style={typingContainerStyle}>
+                    <span>{typedText}</span>
+                    <span style={cursorStyle}>|</span>
+                </div>
+            </div>
+        </>
     );
-}
+};
 
 export default Home;
