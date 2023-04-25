@@ -9,11 +9,6 @@ const NewsCommentItem = ({comment, deleteComment, updateComment}) => {
     const [stateEdit, setStateEdit] = useState(false)
     const [commentInitial, setCommentInitial] = useState(comment.comment)
     const { currentUser } = useSelector((state) => state.user);
-    console.log("currentUser",currentUser)
-    console.log("commentUser",comment.user)
-
-
-
 
     return(<div className="row me-1">
 
