@@ -3,6 +3,7 @@ import {w3cwebsocket as W3CWebSocket} from "websocket"
 import React from "react";
 import {useState,useEffect} from "react";
 import {findAllNews} from "../services/news-service"
+import "./news.css"
 import {Link, Route} from "react-router-dom";
 import {Routes} from "react-router";
 import View from "../view/view";
@@ -27,8 +28,23 @@ function onButtonClicked (hello) {
 const NewsComponent = () => {
 
     const [news, setNews] =useState([])
-    const findNews = () => findAllNews().then(response =>  setNews(response))
-    useEffect(()=> {findNews()},[])
+    const [currentPage, setCurrentPage] =useState(1)
+    const [totalPage, setTotalPage] =useState([])
+    const [pattern,setPattern] = useState(null)
+    const findNews = (page,pattern) => findAllNews(page,pattern).then(response => { setNews(response.data)
+    setCurrentPage(response.currentPage)
+
+        setTotalPage(response.totalPage)
+    })
+    useEffect(()=> {findNews(currentPage)},[])
+    const previous =() =>{
+
+        findNews(Number(currentPage)-1,pattern)
+    }
+    const next =() =>{
+
+        findNews(Number(currentPage)+1,pattern)
+    }
 
 
 
@@ -58,16 +74,27 @@ const NewsComponent = () => {
             <div className="input-group mb-3">
                 <input
                     type="text"
+                    value={pattern}
                     className="form-control rounded"
                     placeholder="Search"
+                    onChange={event => {setPattern(event.target.value)}}
 
                 />
-                <button className="btn btn-primary rounded ml-2" type="submit">Search</button>
+                <button className="btn btn-primary rounded ml-2"  onClick={()=>{pattern==null?findNews(1,null):findNews(1,pattern)}}>Search</button>
             </div>
 
             <ul className="list-group">
             {news.map(data => <NewsItem news={data} key={data._id}/>)}
             </ul>
+            <div className="row">
+                <div className="col-6">
+                <button className="btn-primary rounded  float-end me-2  btnNews mb-5" disabled={currentPage==1} onClick={()=>previous()} >Previous</button>
+                </div>
+                <div className="col-6">
+                    <button className="btn-primary rounded  float-start ms-2 mb-5 btnNews" disabled={currentPage==totalPage} onClick={()=>next()}>Next</button>
+                    <span className="font-monospace float-end">Page={currentPage}, Total Pages={totalPage}</span>
+                </div>
+            </div>
         </>
 )
 
