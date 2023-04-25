@@ -64,6 +64,13 @@ const NewsItem = ({news = {"description"
 
     }
 
+    const incrementComment =() =>{
+        setCommentCount(commentCount+1)
+        console.log(commentCount)
+    }
+    const decrementComment =() =>{
+        setCommentCount(commentCount-1)
+    }
     return(
 
             <li className="list-group-item mt-1 mb-1 rounded bg-light" >
@@ -113,7 +120,7 @@ const NewsItem = ({news = {"description"
             </div>
             {
                 showComment &&
-                <NewsComments news={news}/>
+                <NewsComments news={news} incrementComment={incrementComment} decrementComment={decrementComment} />
             }
            </div>
         </div>

@@ -21,6 +21,10 @@ function LoginScreen() {
     }
 
     const responseGoogle = async (response) => {
+        console.log(response)
+        if(response.error){
+            return
+        }
         const user = {
             username: response.profileObj.givenName,
             password: response.profileObj.googleId,
