@@ -5,8 +5,11 @@ import {useDispatch,useSelector} from "react-redux";
 import {setSidebar} from "../reducers/sidebar-reducer"
 import NewsComponent from "./news";
 import NewsComments from "../news-comments/news-comments";
-import {useState} from "react";
+import * as newsLikeService from "../services/news-like-service"
+import * as newsCommentsService from "../services/news-comments-service"
+import {useEffect, useState} from "react";
 import CreateComment from "../news-comments/create-comment";
+import {commentsCount} from "../services/news-comments-service";
 
 const NewsItem = ({news = {"description"
 :
@@ -22,13 +25,52 @@ const NewsItem = ({news = {"description"
     "771e55f3-e624-465a-a6a8-f4ee7599e327"
 
 }}) => {
-    const dispatch = useDispatch();
-   /* const sidebar = useSelector(state => state.sidebar)*/
-
-    //onClick={() => dispatch(setSidebar({component:"news",newsid:news._id}))}
-
+    const dispatch = useDispatch()
+    const { currentUser } = useSelector((state) => state.user);
+    const [likeCount,setLikeCount] = useState(0)
+    const [commentCount,setCommentCount] = useState(0)
+    const [likeState,setLikeState] = useState(false)
     const [showComment, setShowComment] = useState(false)
 
+    useEffect(()=>{
+         newsLikeService.newsLikeCount(news._id).then(res=> {
+             setLikeCount(res)})
+        newsCommentsService.commentsCount(news._id).then(res=> {
+            setCommentCount(res)})
+
+        if(currentUser){
+        newsLikeService.isNewsLiked(currentUser._id,news._id).then(res => {
+          setLikeState(res)
+
+    })}},[])
+
+    const setNewsLike =  () => {
+        if(!currentUser){
+            if(window.confirm("You are not authorized to like a news, Click OK to login")) {
+                window.location.href = "/login"
+            }
+            return
+        }
+        if(likeState){
+           setLikeState(false)
+            setLikeCount(likeCount-1)
+            newsLikeService.updateNewsLike(currentUser._id, news._id, false)
+        }
+        else{
+            setLikeState(true)
+            setLikeCount(likeCount+1)
+            newsLikeService.updateNewsLike(currentUser._id, news._id, true)
+        }
+
+    }
+
+    const incrementComment =() =>{
+        setCommentCount(commentCount+1)
+        console.log(commentCount)
+    }
+    const decrementComment =() =>{
+        setCommentCount(commentCount-1)
+    }
     return(
 
             <li className="list-group-item mt-1 mb-1 rounded bg-light" >
@@ -74,11 +116,11 @@ const NewsItem = ({news = {"description"
             </div>
             <div className=" text-justify">{news.description}</div>
             <div className="row mt-2 mb-2">
-           <span> <i className="fa-regular fa-comment col-3" onClick={() => {showComment?setShowComment(false):setShowComment(true)}}> </i> <i className="fa-regular fa-thumbs-up col-3"/> <i className="fas fa-paste col-3"/> <i className="fas fa-link col-2" onClick={() => dispatch(setSidebar({component:"news",newsid:news._id}))}/> </span>
+                <span> <i className="fa-regular fa-comment col-3" onClick={() => {showComment?setShowComment(false):setShowComment(true)}}><span className="font-monospace ms-2">{commentCount}</span> </i> {likeState?<i className="fa-solid fa-thumbs-up col-3" style={{"color":"red"}} onClick={()=>{setNewsLike()}}><span className="font-monospace ms-2">{ likeCount}</span></i>:<i className="fa-regular fa-thumbs-up col-3  " style={likeCount>0?{"color":"red"}:{"color":"black"}} onClick={()=>{setNewsLike()}} ><span className="font-monospace ms-2">{ likeCount}</span></i>} <i className="fas fa-paste col-3"/> <i className="fas fa-link col-2" onClick={() => dispatch(setSidebar({component:"news",newsid:news._id}))}/> </span>
             </div>
             {
                 showComment &&
-                <NewsComments news={news}/>
+                <NewsComments news={news} incrementComment={incrementComment} decrementComment={decrementComment} />
             }
            </div>
         </div>

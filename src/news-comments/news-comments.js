@@ -8,13 +8,13 @@ import {Link} from "react-router-dom";
 import {useLocation} from "react-router";
 
 
-const NewsComments = ({news}) => {
+const NewsComments = ({news,incrementComment,decrementComment}) => {
     const [newsComments,setNewsComments] = useState([])
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const paths = pathname.split('/')
     const active = paths[1];
-    console.log("PATH IS",active)
+
     useEffect(() => {newsCommentService.findAllComments(news._id).then(data => {setNewsComments(data)
     })},[])
 
@@ -32,7 +32,7 @@ const NewsComments = ({news}) => {
                                               "user":currentUser._id,
                                               "comment":inputText}).then(res => {console.log("COMMENT CREATED",res)
             newsCommentService.findAllComments(news._id).then(data => {setNewsComments(data)})})
-
+        incrementComment()
         setInputText('')
     }
 
@@ -41,6 +41,7 @@ const NewsComments = ({news}) => {
         newsCommentsService.deleteComment(commentID).then(res => {console.log("COMMENT DELETED",res)
             newsCommentService.findAllComments(news._id).then(data => {setNewsComments(data)})
 
+            decrementComment()
         })
 
     }

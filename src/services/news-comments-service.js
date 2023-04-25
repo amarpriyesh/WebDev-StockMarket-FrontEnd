@@ -43,3 +43,9 @@ export const findNewsByUserID = async (id) => {
     return news;
 
 };
+
+export const commentsCount = async (newsID) => {
+    const response = await axios.get(`${BASE_URL}/news/comments/count/${newsID}`);
+    const status = response.data;
+    return status;
+};
