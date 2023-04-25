@@ -7,6 +7,7 @@ import "../profile/profile.css"
 import {Routes} from "react-router";
 import View from "../view/view";
 import NewsCommentsOther from "./news-comments-other";
+import NewsLikedOther from "./news-liked-others";
 
 function OtherProfile() {
   const {id} = useParams();
@@ -61,7 +62,7 @@ function OtherProfile() {
             <Routes>
                 <Route path={`/`} element={<NewsCommentsOther id={id}/>}/>
                 <Route path={`/comments`} element={<NewsCommentsOther id={id}/>}/>
-                <Route path={`/likes`} element={""}/>
+                <Route path={`/likes`} element={<NewsLikedOther id={id}/>}/>
                 <Route path={`/dislikes`} element={""}/>
                 <Route path={`/tags`} element={""}/>
             </Routes>
