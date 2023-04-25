@@ -8,6 +8,7 @@ import {Routes} from "react-router";
 import View from "../view/view";
 import NewsCommentsOther from "./news-comments-other";
 import MyViews from "./my-views";
+import ViewCommentsOther from "./view-comments-other";
 
 function OtherProfile() {
   const {id} = useParams();
@@ -45,6 +46,7 @@ function OtherProfile() {
             </div>
           </div>
             <ul className="nav nav-pills mb-2">
+                {console.log(location.pathname)}
                 <li className="nav-item">
                     <Link to={`/profile/${id}/comments`}  className={`nav-link ${location.pathname.indexOf("/comments") >= 0 ? 'active':''}`}>Commented News</Link>
                 </li>
@@ -60,12 +62,9 @@ function OtherProfile() {
                 <li className="nav-item">
                     <Link to={`/profile/${id}/view/created`}  className={`nav-link ${location.pathname.indexOf("/view/created") >= 0 ? 'active':''}`}>Created Views</Link>
                 </li>
-                <li className="nav-item">
-                    <Link to={`/profile/${id}/view/likes`}  className={`nav-link ${location.pathname.indexOf("/view/likes") >= 0 ? 'active':''}`}>Liked Views</Link>
-                </li>
-                <li className="nav-item">
-                    <Link to={`/profile/${id}/view/comments`}  className={`nav-link ${location.pathname.indexOf("/view/comments") >= 0 ? 'active':''}`}>Commented Views</Link>
-                </li>
+                {/*<li className="nav-item">*/}
+                {/*    <Link to={`/profile/${id}/viewComments`}  className={`nav-link ${location.pathname.indexOf("/viewComments") >= 0 ? 'active':''}`}>Commented Views</Link>*/}
+                {/*</li>*/}
             </ul>
             <Routes>
                 <Route path={`/`} element={<NewsCommentsOther id={id}/>}/>
@@ -74,9 +73,8 @@ function OtherProfile() {
                 <Route path={`/dislikes`} element={""}/>
                 <Route path={`/tags`} element={""}/>
                 <Route path={`/view/created`} element={<MyViews id={id}/>}/>
-                <Route path={`/view/likes`} element={""}/>
-                <Route path={`/view/comments`} element={""}/>
-            </Routes>
+                {/*<Route path={`/viewComments`} element={<ViewCommentsOther id={id}/>}/>*/}
+            </Routes>add .
         </div>
   );
 }
