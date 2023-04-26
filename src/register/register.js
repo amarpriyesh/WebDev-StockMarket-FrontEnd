@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { registerThunk } from "../thunks/auth-thunks";
 import {setSidebar} from "../reducers/sidebar-reducer";
+import {createNewUserAction} from "../services/user-action-service";
 
 function RegisterScreen() {
     const [username, setUsername] = useState("");
@@ -29,6 +30,7 @@ function RegisterScreen() {
         if (response.error) {
             setError("Email already exists");
         } else {
+
             navigate("/login");
         }
     };

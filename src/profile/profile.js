@@ -7,12 +7,12 @@ import "./profile.css"
 import UserList from "./user-list";
 import {useNavigate} from "react-router";
 import {setSidebar} from "../reducers/sidebar-reducer";
+import LikedViews from "./liked-views";
 
 function Profile() {
 
     const { currentUser } = useSelector((state) => state.user);
-    //const privilege123 = useSelector((state) => state.privilege);
-console.log("privileges")
+
     const [profile, setProfile] = useState(currentUser);
 
     const dispatch = useDispatch();

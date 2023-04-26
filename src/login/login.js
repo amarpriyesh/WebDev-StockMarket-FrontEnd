@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import {GoogleLogin,GoogleLogout} from "react-google-login";
 import {setSidebar} from "../reducers/sidebar-reducer";
 import {getPrivilege} from "../thunks/privilege-thunk"
+import {createNewUserAction} from "../services/user-action-service.js";
+import {findUserByEmail} from "../services/user-service";
 
 function LoginScreen() {
     const {currentUser} = useSelector((state) => state.user);
@@ -38,10 +40,7 @@ function LoginScreen() {
         console.log("google user", user)
 
         const returnedUserResponse = await dispatch(googleLoginThunk(user));
-
         if (returnedUserResponse.error) {
-
-
             setError("Incorrect credentials");
             navigate("/login")
         } else {
@@ -51,6 +50,31 @@ function LoginScreen() {
         }
 
         console.log('Logged In', currentUser);
+
+        let userId = ""
+
+        await findUserByEmail(user.email).then(res => {
+                console.log("Find User by email -", res)
+                userId = res._id
+            }
+
+        )
+
+        let newUserAction = {
+            userId: userId,
+            username: user.username,
+            role: "REGISTERED",
+            likedNews: [],
+            likedView: [],
+            postedView: [],
+        }
+
+        console.log('Creating new user Action -', newUserAction);
+
+        createNewUserAction(newUserAction).then(res => {
+                console.log( "Created new user Action", res)
+            }
+        )
 
     }
 
@@ -62,6 +86,23 @@ function LoginScreen() {
         } else {
             console.log("resonse payload id",response.payload._id)
             await dispatch(getPrivilege(response.payload._id))
+            console.log(response)
+
+            let newUserAction = {
+                userId: response.payload._id,
+                username: response.payload.username,
+                role: response.payload.role,
+                likedNews: [],
+                likedView: [],
+                postedView: [],
+            }
+
+            console.log('Creating new user Action -', newUserAction);
+
+            createNewUserAction(newUserAction).then(res => {
+                    console.log( "Created new user Action", res)
+                }
+            )
             navigate("/");
         }
     };
