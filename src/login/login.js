@@ -5,6 +5,7 @@ import { loginThunk,googleLoginThunk } from "../thunks/auth-thunks";
 import { useSelector } from "react-redux";
 import {GoogleLogin,GoogleLogout} from "react-google-login";
 import {setSidebar} from "../reducers/sidebar-reducer";
+import {getPrivilege} from "../thunks/privilege-thunk"
 
 function LoginScreen() {
     const {currentUser} = useSelector((state) => state.user);
@@ -37,11 +38,16 @@ function LoginScreen() {
         console.log("google user", user)
 
         const returnedUserResponse = await dispatch(googleLoginThunk(user));
+
         if (returnedUserResponse.error) {
+
+
             setError("Incorrect credentials");
             navigate("/login")
         } else {
             navigate("/");
+            console.log("currentUser",returnedUserResponse.payload._id)
+             dispatch(getPrivilege(returnedUserResponse.payload._id))
         }
 
         console.log('Logged In', currentUser);
@@ -54,6 +60,8 @@ function LoginScreen() {
             setError("Incorrect credentials");
             navigate("/login")
         } else {
+            console.log("resonse payload id",response.payload._id)
+            await dispatch(getPrivilege(response.payload._id))
             navigate("/");
         }
     };

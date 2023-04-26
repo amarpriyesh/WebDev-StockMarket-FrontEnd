@@ -11,18 +11,29 @@ import {setSidebar} from "../reducers/sidebar-reducer";
 function Profile() {
 
     const { currentUser } = useSelector((state) => state.user);
-
+    //const privilege123 = useSelector((state) => state.privilege);
+console.log("privileges")
     const [profile, setProfile] = useState(currentUser);
 
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
+
+
+const setters =async () => {
+    await dispatch(profileThunk())
+    await dispatch(findAllUsersThunk());
+    dispatch(setSidebar({component: "none", newsid: "ddd"}));
+    setProfile(currentUser)
+
+}
     useEffect( () => {
-        dispatch(setSidebar({component:"none",newsid:"ddd"}));
+      /*  dispatch(setSidebar({component:"none",newsid:"ddd"}));
         dispatch(profileThunk());
-        setProfile(currentUser)
-        dispatch(findAllUsersThunk());
-    }, [currentUser] );
+        dispatch(findAllUsersThunk());*/
+setters()
+
+    }, [] );
 
     return (
         <div className="container">
