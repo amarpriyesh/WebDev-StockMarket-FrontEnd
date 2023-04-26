@@ -6,6 +6,7 @@ import {profileThunk} from "../thunks/auth-thunks";
 import {findAllUsersThunk} from "../thunks/user-thunks";
 import {setSidebar} from "../reducers/sidebar-reducer"
 import HighlightComponent from "../highlights/highlight-component"
+import View from "../view/view";
 
 
 
@@ -20,6 +21,9 @@ const SidebarComponent = () => {
     }
 else if (sidebar.component === "news"){
         return( <HighlightComponent/>)
+    }
+    else if (sidebar.component === "views"){
+        return( <View/>)
     }
 
 else{

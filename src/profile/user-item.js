@@ -1,13 +1,15 @@
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {deleteUserThunk} from "../thunks/user-thunks";
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import * as privilegeService from "../services/privilege-service"
+import {getPrivilege} from "../thunks/privilege-thunk";
 import Toggle from "./toggle";
 
 const UserItem = ({user}) => {
     console.log("render")
     const dispatch = useDispatch();
+    const { currentUser } = useSelector((state) => state.user);
     const [like,setLike] = useState()
     const [comment,setComment] = useState()
     const [view,setView] = useState()
@@ -38,23 +40,31 @@ const UserItem = ({user}) => {
 
     }, [])
 
-    const setUserLike=(val) =>{
+    const setUserLike=async (val) => {
+
+        await privilegeService.updatePrivilege(user._id, {"allowLikes": Boolean(val)})
+        await dispatch(getPrivilege(currentUser._id))
+        console.log("like toggled", Boolean(val))
         setLike(val)
-        privilegeService.updatePrivilege(user._id,{"allowLikes":Boolean(val)})
-        console.log("like toggled",Boolean(val))
 
     }
-    const setUserComments=(val) =>{
+    const setUserComments=async (val) => {
+
+        await privilegeService.updatePrivilege(user._id, {"allowComments": val})
+        await dispatch(getPrivilege(currentUser._id))
         setComment(val)
-        privilegeService.updatePrivilege(user._id,{"allowComments":val})
     }
-    const setUserViews=(val) =>{
+    const setUserViews=async (val) => {
+
+        await privilegeService.updatePrivilege(user._id, {"allowViews": val})
+        await dispatch(getPrivilege(currentUser._id))
         setView(val)
-        privilegeService.updatePrivilege(user._id,{"allowViews":val})
     }
-    const setUserSignIn=(val) =>{
+    const setUserSignIn=async (val) => {
+
+        await privilegeService.updatePrivilege(user._id, {"allowSignIn": val})
+        await dispatch(getPrivilege(currentUser._id))
         setLogin(val)
-        privilegeService.updatePrivilege(user._id,{"allowSignIn":val})
     }
     const deleteUserHandler = (id) => {
         dispatch(deleteUserThunk(id));

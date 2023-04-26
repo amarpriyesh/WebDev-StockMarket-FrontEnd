@@ -9,6 +9,14 @@ export const findAllViewsThunk = createAsyncThunk(
     }
 );
 
+export const findAllViewsThunkUser = createAsyncThunk(
+    "views/findAllViews",
+    async (userID) => {
+        return await viewsService.findAllViewsByUser(userID);
+    }
+);
+
+
 export const updateViewThunk =
     createAsyncThunk(
         'views/updateView',

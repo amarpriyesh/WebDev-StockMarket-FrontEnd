@@ -139,8 +139,8 @@ const ViewStats = ({view, setView}) => {
 
 
     return (
-        <>
-            <div className="p-2 pe-5 wd-float-left">
+        <><div className="row">
+            <div className="p-2 pe-5 wd-float-left col-4">
 
                 <span onClick={handleShow}><i className="me-2 fa-regular fa-comment"></i>{commentCount}</span>
 
@@ -187,7 +187,7 @@ const ViewStats = ({view, setView}) => {
 
 
 
-            <div className="p-2 pe-5 wd-float-left">
+            <div className="p-2 pe-5 wd-float-left col-4">
                 <a className="wd-tabs-link">
                     <span onClick={likeView}>
                         {
@@ -201,6 +201,22 @@ const ViewStats = ({view, setView}) => {
 
                 </a>
             </div>
+
+            <div className="p-2 pe-5 wd-float-left col-4">
+                <a className="wd-tabs-link">
+                    <span onClick={likeView}>
+                        {
+                            <div className="pe-5 wd-float-left">
+                                <i onClick={() => handleLikes()}
+                                   className={liked ? "fa-solid fa-thumbs-up" : "fa-regular fa-thumbs-up"} ></i>
+                                {likesCount}
+                            </div>
+                        }
+                    </span>
+
+                </a>
+            </div>
+        </div>
 
         </>
     );

@@ -10,6 +10,8 @@ import {useLocation} from "react-router";
 
 const NewsComments = ({news,incrementComment,decrementComment}) => {
     const [newsComments,setNewsComments] = useState([])
+    const [renderError,setRenderError] = useState(false)
+    const { privilege } = useSelector((state) => state.privilege);
     const navigate = useNavigate();
     const {pathname} = useLocation();
     const paths = pathname.split('/')
@@ -22,7 +24,13 @@ const NewsComments = ({news,incrementComment,decrementComment}) => {
     const [inputText,setInputText] = useState('')
 
     const createComment = () => {
+        console.log(privilege)
+        if(!privilege.allowComments){
+            setRenderError(true)
+            return
 
+        }
+        setRenderError(false)
         if(!currentUser){
             alert("User is not authorized, taking you to login page")
             navigate("/login")
@@ -87,6 +95,9 @@ const NewsComments = ({news,incrementComment,decrementComment}) => {
             {newsComments.map(commentNews => <NewsCommentItem comment={commentNews} deleteComment={deleteComment} updateComment={updateComment} key={commentNews._id}/>)}
 
         </ul>
+            {renderError && <div className="alert alert-danger mt-3" role="alert">
+                User is not authorized to post comments. Contact the Admin.
+            </div>}
         </div>
     </>)
 }

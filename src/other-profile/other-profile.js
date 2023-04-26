@@ -54,9 +54,6 @@ function OtherProfile() {
                     <Link to={`/profile/${id}/likes`}  className={`nav-link ${location.pathname.indexOf("/likes") >= 0 ? 'active':''}`}>Liked News</Link>
                 </li>
                 <li className="nav-item">
-                    <Link to={`/profile/${id}/dislikes`}  className={`nav-link ${location.pathname.indexOf("/dislikes") >= 0 ? 'active':''}`}>Disliked News</Link>
-                </li>
-                <li className="nav-item">
                     <Link to={`/profile/${id}/tags`}  className={`nav-link ${location.pathname.indexOf("/tags") >= 0 ? 'active':''}`}>Tagged Views</Link>
                 </li>
                 <li className="nav-item">

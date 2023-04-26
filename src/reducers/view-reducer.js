@@ -4,7 +4,7 @@ import {
     createViewCommentThunk,
     createViewThunk, deleteViewCommentThunk,
     deleteViewThunk,
-    findAllViewsThunk,
+    findAllViewsThunk, findAllViewsThunkUser,
     updateViewThunk
 } from "../thunks/views-thunk";
 
@@ -20,6 +20,11 @@ const viewSlice = createSlice({
     },
 
     extraReducers : {
+        [findAllViewsThunkUser.fulfilled]:
+            (state, { payload }) => {
+            console.log(payload)
+                state.view = payload
+            },
         [findAllViewsThunk.fulfilled]:
             (state, { payload }) => {
                 state.view = payload

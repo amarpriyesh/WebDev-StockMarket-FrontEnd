@@ -1,16 +1,25 @@
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
 import ViewListItem from "./view-list-item.js"
-import {findAllViewsThunk} from "../thunks/views-thunk";
+import {findAllViewsThunk, findAllViewsThunkUser} from "../thunks/views-thunk";
+import {current} from "@reduxjs/toolkit";
 
 const ViewList = () => {
-
+    const { currentUser } = useSelector((state) => state.user);
     const views = useSelector((state) => state.view);
+    const sidebar = useSelector((state) => state.sidebar)
     //const [views, setViews] =useState(viewsN)
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(findAllViewsThunk())
+
+        if(sidebar.component !== "views") {
+            dispatch(findAllViewsThunk())
+        }
+        else{
+            console.log("REACHING")
+            dispatch(findAllViewsThunkUser(currentUser._id))
+        }
 
     }, [])
 
