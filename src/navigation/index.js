@@ -47,17 +47,12 @@ const NavigationSidebar = (
                 </Link>
                 )}
 
-                <div className="row pt-2 pe-2 ">
-                    <button type="button"
-                            className="btn btn-primary btn-lg btn-block rounded-pill width1"> Views
-                    </button>
-                </div>
             </div>
 
 
 
             <div className="list-group wd-margin-left d-lg-none">
-                <a className="list-group-item"> <i className="fa fa-twitter fa-2x" style={{"color":"blue"}}></i>   </a>
+
                 <Link to="/news" className={`list-group-item ${active === 'news'?'active':''}`}>
                     <i className="fa fa-home"></i>
                 </Link>
@@ -85,11 +80,6 @@ const NavigationSidebar = (
                     <i className="fa fa-laptop"></i>
                 </Link>
                 )}
-                <div className="row pt-3 pe-2">
-                    <button type="button"
-                            className="btn btn-primary btn-lg btn-block rounded-pill width1">Tweet
-                    </button>
-                </div>
             </div>
 
         </>
