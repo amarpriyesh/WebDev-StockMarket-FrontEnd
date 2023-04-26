@@ -87,13 +87,13 @@ const stockImages = [
 
 
 const Home = () => {
-    const text = 'StockMarketNews is a cutting-edge web platform designed to provide users with ' +
+    const text = '$tockMarketNews is a cutting-edge web platform designed to provide users with ' +
         'real-time stock market news and insights. By leveraging the powerful APIs ' +
         'offered by MarketAux.com, StockMarketNews aims to deliver up-to-the-minute financial ' +
         'data, expert analysis, and market trends to both individual investors and ' +
         'financial professionals. In addition, StockMarketNews provides CRUD operations on user management,' +
         'search functionality using Remote API, regular updates from the MarketAux API,' +
-        'news and search access to anonymous users, option to comment and provide views to logged in users.';
+        'news and search access to anonymous users, option to comment and provide views to logged in users.$';
     const typingSpeed = 50;
 
     const useTypingEffect = (text, typingSpeed) => {
@@ -140,7 +140,7 @@ const Home = () => {
         `}
             </style>
             <div style={containerStyle}>
-                <h1 style={titleStyle}>StockMarketNews</h1>
+                <h1 style={titleStyle}>$$tockMarketNews</h1>
                 <h2 style={subtitleStyle}>Real-time Stock Market News and Insights</h2>
                 <div style={typingContainerStyle}>
                     <span>{typedText}</span>
