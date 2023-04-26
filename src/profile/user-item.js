@@ -6,11 +6,12 @@ import * as privilegeService from "../services/privilege-service"
 import Toggle from "./toggle";
 
 const UserItem = ({user}) => {
+    console.log("render")
     const dispatch = useDispatch();
-    const [like,setLike] = useState(true)
-    const [comment,setComment] = useState(true)
-    const [view,setView] = useState(true)
-    const [login,setLogin] = useState(true)
+    const [like,setLike] = useState()
+    const [comment,setComment] = useState()
+    const [view,setView] = useState()
+    const [login,setLogin] = useState()
 
     const setVal=(res) => {
         setLike(Boolean(res.allowLikes))
@@ -35,7 +36,7 @@ const UserItem = ({user}) => {
 
 
 
-    }, [user._id])
+    }, [])
 
     const setUserLike=(val) =>{
         setLike(val)
