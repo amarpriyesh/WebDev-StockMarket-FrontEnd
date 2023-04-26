@@ -27,3 +27,7 @@ export const findUserById = async (userId) => {
     return response.data;
 }
 
+export const findUserByEmail = async (email) => {
+    const response = await api.get(`${BASE_URL}/users/email/${email}`);
+    return response.data;
+}
