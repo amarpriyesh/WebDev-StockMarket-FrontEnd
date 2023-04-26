@@ -6,18 +6,13 @@ import UserItem from "./user-item";
 const UserList = () => {
     const { allUsers } = useSelector((state) => state.user);
     const dispatch = useDispatch();
-    useEffect(() => {
+  /*  useEffect(() => {
         dispatch(findAllUsersThunk())
-    }, [allUsers])
+    }, [allUsers])*/
 
     return(
         <ul className="list-group">
-            {
-                // loading &&
-                // <li className="list-group-item">
-                //     Loading...
-                // </li>
-            }
+
             {
                 allUsers.map(user => <UserItem key={user._id} user={user}/>)
             }
