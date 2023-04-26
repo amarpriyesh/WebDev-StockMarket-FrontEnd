@@ -54,7 +54,7 @@ function AddComment({view, setComment, setCommentCount}) {
                                   onChange={(event) => setNewComment(event.target.value)}>
                         </textarea>
                         <div>
-                            <button className="rounded-pill btn btn-primary float-end mt-2 ps-3 pe-3 fw-bold"
+                            <button className="rounded btn btn-primary float-end mt-2 ps-3 pe-3 fw-bold"
                                     onClick={commentClickHandler}>
                                 Comment
                             </button>
