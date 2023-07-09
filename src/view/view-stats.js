@@ -11,6 +11,7 @@ import PopupComment from "./comment/popup-comment.js"
 import CreateComment from "./comment/create-comment";
 import ViewComment from "./comment/view-comment";
 import AddComment from "./comment/add-comment";
+import * as tagService from "../services/tag-service"
 import {addViewLikeByUser, findAllLikedViewsByUser, removeLikeViewFromUser} from "../services/user-action-service";
 import {
     decreaseViewLikeCount, getViewLikeCount,
@@ -21,6 +22,7 @@ import {
 const ViewStats = ({view, setView}) => {
     // let view2 = (useSelector((state) => state.view.view))
     // view = view2.find(item => item._id === view._id)
+    const sidebar = useSelector((state) => state.sidebar)
 
     const dispatch = useDispatch();
     const likeView = () => {
@@ -31,6 +33,18 @@ const ViewStats = ({view, setView}) => {
 
 
     const [showModal, setShow] = useState(false);
+    const [tag, setTag] = useState(false);
+
+    const handleTags =()=>{
+        if(sidebar.component==="views" && currentUser) {
+
+
+tagService.createTag({"news":sidebar.newsid,"user":currentUser,"views":view})
+alert("view tagged")
+
+        }
+
+    }
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -207,9 +221,9 @@ const ViewStats = ({view, setView}) => {
                     <span onClick={likeView}>
                         {
                             <div className="pe-5 wd-float-left">
-                                <i onClick={() => handleLikes()}
-                                   className={liked ? "fa-solid fa-thumbs-up" : "fa-regular fa-thumbs-up"} ></i>
-                                {likesCount}
+                                <i onClick={() => handleTags()}
+                                   className={tag ? "fas fa-tag" : "fas fa-tag"} ></i>
+                               Tags
                             </div>
                         }
                     </span>

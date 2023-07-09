@@ -42,28 +42,33 @@ const CreateView = () => {
     return (
         <>
             {currentUser &&
-                <div className="row">
-                    <div className="col-auto">
-                        <img referrerPolicy="no-referrer" src={currentUser.profilePhoto} width={60}/>
+                <div className="mb-2">
+                    <div className=" bg-light list-group ">
+                    <div className="col-2  mt-3 mb-2 ">
+                        <img className="rounded-2" referrerPolicy="no-referrer" src={currentUser.profilePhoto} width={60}/>
                     </div>
                     <div className="col-10">
                         <input value={title}  className="form-control border-0" type="text" placeholder="Title"
                                 onChange={(event) => setTitle(event.target.value)}
                         />
                         <textarea value={newView} placeholder="My View . . ."
-                                  className="form-control border-0 mt-3"
+                                  className="form-control border-1 mt-3 rounded"
                                   onChange={(event) => setNewView(event.target.value)}>
                         </textarea>
                         <div>
-                            <button className="rounded btn btn-primary float-end mt-2 ps-3 pe-3 fw-bold"
+                            <button className="rounded btn btn-primary float-end mb-2 mt-2 ps-3 pe-3 fw-bold"
                                     onClick={viewClickHandler}>
                                 Create View
                             </button>
 
                         </div>
                     </div>
-                    <div className="col-12"><hr/></div>
+                    <div className="col-12"><hr className="text-decoration-line-through"/></div>
+
+                    </div>
+
                 </div>
+
             }
         </>
     );

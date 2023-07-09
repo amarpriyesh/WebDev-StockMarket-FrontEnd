@@ -48,15 +48,16 @@ const NewsItem = ({news = {"description"
 
     const setNewsLike =  () => {
 
-        if(!privilege.allowLikes){
-            setRenderError(true)
-            return
-        }
+
         setRenderError(false)
         if(!currentUser){
             if(window.confirm("You are not authorized to like a news, Click OK to login")) {
                 window.location.href = "/login"
             }
+            return
+        }
+        if(!privilege.allowLikes){
+            setRenderError(true)
             return
         }
         if(likeState){
@@ -124,7 +125,7 @@ const NewsItem = ({news = {"description"
             </div>
             <div className=" text-justify">{news.description}</div>
             <div className="row mt-2 mb-2">
-                <span> <i className="fa-regular fa-comment col-3" onClick={() => {showComment?setShowComment(false):setShowComment(true)}}><span className="font-monospace ms-2">{commentCount}</span> </i> {likeState?<i className="fa-solid fa-thumbs-up col-3" style={{"color":"red"}} onClick={()=>{setNewsLike()}}><span className="font-monospace ms-2">{ likeCount}</span></i>:<i className="fa-regular fa-thumbs-up col-3  " style={likeCount>0?{"color":"red"}:{"color":"black"}} onClick={()=>{setNewsLike()}} ><span className="font-monospace ms-2">{ likeCount}</span></i>} <i className="fas fa-paste col-3" onClick={() => dispatch(setSidebar({component:"views",newsid:news._id}))}/> <i className="fas fa-link col-2" onClick={() => dispatch(setSidebar({component:"news",newsid:news._id}))}/> </span>
+                <span> <i className="fa-regular fa-comment float-start col-3" onClick={() => {showComment?setShowComment(false):setShowComment(true)}}><span className="font-monospace ms-2">{commentCount}</span> </i> {likeState?<i className="fa-solid fa-thumbs-up float-start col-3" style={{"color":"red"}} onClick={()=>{setNewsLike()}}><span className="font-monospace ms-2">{ likeCount}</span></i>:<i className="fa-regular fa-thumbs-up  float-start col-3  " style={likeCount>0?{"color":"red"}:{"color":"black"}} onClick={()=>{setNewsLike()}} ><span className="font-monospace ms-2">{ likeCount}</span></i>} <i className="fas fa-paste float-start col-3" onClick={() => dispatch(setSidebar({component:"views",newsid:news,extra:"news"}))}/> <i className="fas fa-link float-start col-1" onClick={() => dispatch(setSidebar({component:"news",newsid:news._id}))}/> <i className="fas fa-lightbulb-o float-end col-1" onClick={() => dispatch(setSidebar({component:"views",newsid:news,extra:"tag"}))}/> </span>
 
             </div>
             {

@@ -7,6 +7,8 @@ import "./news.css"
 import {Link, Route} from "react-router-dom";
 import {Routes} from "react-router";
 import View from "../view/view";
+import {setSidebar} from "../reducers/sidebar-reducer";
+import {useDispatch} from "react-redux";
 const client = new W3CWebSocket('ws://127.0.0.1:8000');
 
 
@@ -26,7 +28,7 @@ function onButtonClicked (hello) {
 }
 
 const NewsComponent = () => {
-
+const dispatch = useDispatch()
     const [news, setNews] =useState([])
     const [currentPage, setCurrentPage] =useState(1)
     const [totalPage, setTotalPage] =useState([])
@@ -36,10 +38,12 @@ const NewsComponent = () => {
 
         setTotalPage(response.totalPage)
     })
-    useEffect(()=> {findNews(currentPage)},[])
+    useEffect(()=> {findNews(currentPage)
+        dispatch(setSidebar({component:"views",newsid:"none",extra:"news"}))},[])
     const previous =() =>{
 
         findNews(Number(currentPage)-1,pattern)
+
     }
     const next =() =>{
 

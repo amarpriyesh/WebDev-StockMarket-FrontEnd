@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setSidebar} from "../reducers/sidebar-reducer";
+import {useLocation} from "react-router";
 
 const containerStyle = {
     fontFamily: 'Arial, sans-serif',
@@ -11,7 +12,7 @@ const containerStyle = {
     padding: '20px',
     maxWidth: '100vw',
     minHeight: '100vh',
-    backgroundImage: 'linear-gradient(to bottom right, #2C3E50, #4CA1AF)',
+
 };
 
 const titleStyle = {
@@ -87,6 +88,7 @@ const stockImages = [
 
 
 const Home = () => {
+
     const text = '$tockMarketNews is a cutting-edge web platform designed to provide users with ' +
         'real-time stock market news and insights. By leveraging the powerful APIs ' +
         'offered by MarketAux.com, StockMarketNews aims to deliver up-to-the-minute financial ' +
@@ -95,6 +97,7 @@ const Home = () => {
         'search functionality using Remote API, regular updates from the MarketAux API,' +
         'news and search access to anonymous users, option to comment and provide views to logged in users.$';
     const typingSpeed = 50;
+
 
     const useTypingEffect = (text, typingSpeed) => {
         const [typedText, setTypedText] = useState('');
@@ -109,7 +112,6 @@ const Home = () => {
             };
 
             typeCharacter(0);
-            dispatch(setSidebar({component:"none",newsid:"ddd"}));
             return () => clearTimeout(timer); // Clear timer on unmount
         }, [text, typingSpeed]);
 
@@ -119,7 +121,9 @@ const Home = () => {
 
 
     const typedText = useTypingEffect(text, typingSpeed);
-    const dispatch = useDispatch();
+
+
+
 
 
     return (

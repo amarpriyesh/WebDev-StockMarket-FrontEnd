@@ -25,16 +25,17 @@ const NewsComments = ({news,incrementComment,decrementComment}) => {
 
     const createComment = () => {
         console.log(privilege)
-        if(!privilege.allowComments){
-            setRenderError(true)
-            return
 
-        }
         setRenderError(false)
         if(!currentUser){
             alert("User is not authorized, taking you to login page")
             navigate("/login")
             return
+        }
+        if(  !privilege.allowComments){
+            setRenderError(true)
+            return
+
         }
         newsCommentsService.createComment({"news":news,
                                               "user":currentUser._id,

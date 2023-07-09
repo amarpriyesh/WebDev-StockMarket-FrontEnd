@@ -6,7 +6,7 @@ import NewsItem from '../news/news-item';
 
 function SearchResults() {
     const dispatch = useDispatch();
-    dispatch(setSidebar({ component: 'none', newsid: 'ddd' }));
+    dispatch(setSidebar({component:"views",newsid:"none",extra:"news"}))
     const [searchQuery, setSearchQuery] = useState('');
     const [searchType, setSearchType] = useState('symbols');
     const [searchResults, setSearchResults] = useState([]);

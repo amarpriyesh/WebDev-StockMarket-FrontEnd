@@ -16,6 +16,7 @@ function Profile() {
     const [profile, setProfile] = useState(currentUser);
 
     const dispatch = useDispatch();
+    dispatch(setSidebar({component:"views",newsid:"none",extra:"others"}))
     const navigate = useNavigate()
 
 

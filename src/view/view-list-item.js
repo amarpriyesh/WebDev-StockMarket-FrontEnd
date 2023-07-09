@@ -9,7 +9,7 @@ import '../css/index.css';
 const ViewListItem = ({view, key, findAllViews}) => {
 
     const dispatch = useDispatch();
-
+    const sidebar  = useSelector((state) => state.sidebar);
 
     const { currentUser } = useSelector((state) => state.user);
 
@@ -31,15 +31,17 @@ const ViewListItem = ({view, key, findAllViews}) => {
 
         <li className="list-group-item mb-3 rounded bg-light">
             <div className="row">
-                <div className="col-1">
+                {!sidebar.component==="views" &&
+                    <div className="col-1 ">
                     <img referrerPolicy="no-referrer" className="wd-who-to-follow-img" width="50px" height="50px" src={view.profilePhoto}/>
-                </div>
+                    </div>
+                }
                 <div className="col-10">
                     <div className="ps-1">
-                        <Link to={"/profile/" + view.userId} ><span className="wd-username-view"><strong>{view.username}</strong></span></Link>
+                        <Link to={"/profile/" + view.userId} ><span className="wd-username-view">{view.username}</span></Link>
                         <i cl  assName="fa fa-check-circle"></i>
                         {/*<span className="wd-author"> - {moment(view.datePosted).format('MMMM Do, YYYY') }</span>*/}
-                        <span className="wd-author"> - {moment(view.datePosted).fromNow() }</span>
+                        <span className="wd-author "> - {moment(view.datePosted).fromNow() }</span>
                     </div>
                     <div className="ps-1">
                         <span className="wd-view-title"> {view.title}</span>
@@ -48,7 +50,7 @@ const ViewListItem = ({view, key, findAllViews}) => {
 
                 <div className="col-1">
                     {currentUser && currentUser._id === view.userId &&
-                    <i onClick={() => deleteViewHandler(view._id)} className="fas fa-remove fa-2x fa-pull-right"></i>
+                    <i onClick={() => deleteViewHandler(view._id)} className="fas fa-remove  fa-pull-right"></i>
                     }
                 </div>
 

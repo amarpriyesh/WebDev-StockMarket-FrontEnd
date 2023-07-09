@@ -23,14 +23,24 @@ import OtherProfile from "./other-profile/other-profile";
 
 
 function App() {
+    const imgMyimage = require('./images/bg4.jpg');
+    const divStyle = {
+        width: '100%',
+        height: '100%',
+        backgroundImage: `url(${imgMyimage})`,
+        backgroundSize: 'cover'
+    };
 
   return (
       <Provider store={store}>
           <LoadProfile>
-        <div className="App">
+        <div className="App" style={divStyle}>
+
             <Router>
                 <div className="row m-1 ">
-                    <div className="d-none d-sm-block col-sm-1 col-md-2 col-lg-2 col-xl-2 col-xxl-2">
+                    <div className="d-none d-sm-block col-sm-1 col-md-2 col-lg-2 col-xl-2 col-xxl-2 ">
+
+
                         <NavigationSidebar active="news"/>
                     </div>
 
@@ -51,12 +61,15 @@ function App() {
                   <Route path="/news" element={<NewsComponent/>} />
               </Routes>
                     </div>
-                    <div className="d-none d-lg-block col-lg-3  col-xl-3 col-xxl-3">
+
+
+                    <div className="d-none d-lg-block col-lg-3  col-xl-3 col-xxl-3 " >
                    <SidebarComponent/>
                     </div>
                 </div>
 
             </Router>
+
         </div>
               </LoadProfile>
       </Provider>

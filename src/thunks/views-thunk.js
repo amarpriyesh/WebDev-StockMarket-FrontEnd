@@ -1,5 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import * as viewsService from "../services/views-service";
+import * as tagServie from "../services/tag-service";
 
 
 export const findAllViewsThunk = createAsyncThunk(
@@ -15,6 +16,15 @@ export const findAllViewsThunkUser = createAsyncThunk(
         return await viewsService.findAllViewsByUser(userID);
     }
 );
+
+
+export const findAllViewsThunkNews = createAsyncThunk(
+    "views/findAllViews",
+    async (userID) => {
+        return await tagServie.findTagByNewsID(userID);
+    }
+);
+
 
 
 export const updateViewThunk =
