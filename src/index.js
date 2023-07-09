@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Mongoose} from "mongoose";
-
+import {GoogleLogin,GoogleOAuthProvider,useGoogleLogin} from  '@react-oauth/google';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'font-awesome/css/font-awesome.min.css';
@@ -19,8 +19,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <>
+            <GoogleOAuthProvider clientId="48989110748-md5pmjb021g6gh28t3oo40qev4ahdto2.apps.googleusercontent.com">
 
         <App />
+            </GoogleOAuthProvider>
         </>
     </React.StrictMode>
 );

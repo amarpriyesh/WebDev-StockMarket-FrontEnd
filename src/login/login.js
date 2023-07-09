@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {useLocation, useNavigate} from "react-router";
 import { useDispatch } from "react-redux";
 import { loginThunk,googleLoginThunk } from "../thunks/auth-thunks";
 import { useSelector } from "react-redux";
-import {GoogleLogin,GoogleOAuthProvider} from  '@react-oauth/google';
+import {GoogleLogin,GoogleOAuthProvider,useGoogleLogin} from  '@react-oauth/google';
 import {setSidebar} from "../reducers/sidebar-reducer";
 import {getPrivilege} from "../thunks/privilege-thunk"
 import {createNewUserAction} from "../services/user-action-service.js";
 import {findUserByEmail} from "../services/user-service";
+import axios from "axios";
 
 function LoginScreen() {
     const {currentUser} = useSelector((state) => state.user);
     const [email, setEmail] = useState("");
+    const [ user, setUser ] = useState([]);
+    const [ profile, setProfile ] = useState([]);
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
@@ -24,18 +27,52 @@ function LoginScreen() {
         clientId = "959350101705-2b65fq1nv6o2211ipkt87cb7a5askm82.apps.googleusercontent.com"
     }
 
+
+    const login = useGoogleLogin({
+                                     onSuccess: (codeResponse) => setUser(codeResponse)
+                                     ,
+                                     onError: (error) => console.log('Login Failed:', error)
+                                 });
+
+    useEffect(
+        () => {
+            if (user) {
+                axios
+                    .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
+                        headers: {
+                            Authorization: `Bearer ${user.access_token}`,
+                            Accept: 'application/json'
+                        }
+                    })
+                    .then((res) => {
+                        console.log("This data",res.data)
+                        setProfile(res.data);
+                         responseGoogle(res.data)
+                    })
+                    .catch((err) => console.log(err));
+            }
+        },
+        [ user ]
+    );
+
+    // log out function to log the user out of google and set the profile array to null
+  /*  const logOut = () => {
+        googleLogout();
+        setProfile(null);
+    };*/
+
     const responseGoogle = async (response) => {
-        console.log(response)
+        console.log("Google Object",response)
         if(response.error){
             return
         }
         const user = {
-            username: response.profileObj.givenName,
-            password: response.profileObj.googleId,
-            email: response.profileObj.email,
-            profilePhoto: response.profileObj.imageUrl,
-            firstName: response.profileObj.givenName,
-            lastName: response.profileObj.familyName
+            username: response.given_name,
+            password: response.id,
+            email: response.email,
+            profilePhoto: response.picture,
+            firstName: response.given_name,
+            lastName: response.name
 
         }
         console.log("google user", user)
@@ -145,18 +182,17 @@ function LoginScreen() {
                                 <button onClick={handleLogin} className="btn btn-primary btn-block">
                                     Login
                                 </button>
-                                <GoogleOAuthProvider clientId={clientId}>
 
-
-                                <GoogleLogin
+                                    <button onClick={() => login()}>Sign in with Google 🚀 </button>
+                                {/*<useGoogleLogin
                                     className="btn btn-light btn-block mt-3"
-                                    clientId={clientId}
+
                                     buttonText="Login with Google"
                                     onSuccess={responseGoogle}
                                     onFailure={responseGoogle}
                                     cookiePolicy={"single_host_origin"}
-                                />
-                                </GoogleOAuthProvider>
+                                />*/}
+
                             </div>
                             {error && (
                                 <div className="alert alert-danger mt-3" role="alert">
