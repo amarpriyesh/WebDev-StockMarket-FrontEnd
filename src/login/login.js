@@ -3,7 +3,7 @@ import {useLocation, useNavigate} from "react-router";
 import { useDispatch } from "react-redux";
 import { loginThunk,googleLoginThunk } from "../thunks/auth-thunks";
 import { useSelector } from "react-redux";
-import {GoogleLogin,GoogleLogout} from "react-google-login";
+import {GoogleLogin,GoogleOAuthProvider} from  '@react-oauth/google';
 import {setSidebar} from "../reducers/sidebar-reducer";
 import {getPrivilege} from "../thunks/privilege-thunk"
 import {createNewUserAction} from "../services/user-action-service.js";
@@ -145,6 +145,9 @@ function LoginScreen() {
                                 <button onClick={handleLogin} className="btn btn-primary btn-block">
                                     Login
                                 </button>
+                                <GoogleOAuthProvider clientId={clientId}>
+
+
                                 <GoogleLogin
                                     className="btn btn-light btn-block mt-3"
                                     clientId={clientId}
@@ -153,6 +156,7 @@ function LoginScreen() {
                                     onFailure={responseGoogle}
                                     cookiePolicy={"single_host_origin"}
                                 />
+                                </GoogleOAuthProvider>
                             </div>
                             {error && (
                                 <div className="alert alert-danger mt-3" role="alert">
