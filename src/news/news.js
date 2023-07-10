@@ -9,7 +9,7 @@ import {Routes} from "react-router";
 import View from "../view/view";
 import {setSidebar} from "../reducers/sidebar-reducer";
 import {useDispatch} from "react-redux";
-const client = new W3CWebSocket('wss://stockmarket-production.onrender.com/:8000');
+const client = new W3CWebSocket('wss://stockmarket-production.onrender.com');
 
 
 
