@@ -99,6 +99,7 @@ const dispatch = useDispatch()
                     <span className="font-monospace float-end">Page={currentPage}, Total Pages={totalPage}</span>
                 </div>
             </div>
+            <button className="btn-primary rounded  float-end me-2  btnNews mb-5"  onClick={()=>onButtonClicked("Hey from client")} >SendClient</button>
         </>
 )
 
