@@ -70,37 +70,54 @@ const UserItem = ({user}) => {
         dispatch(deleteUserThunk(id));
     }
     return(
-        <li className="list-group-item">
+        <li className="list-group-item my-1 rounded-2">
             <div className="row">
-                <div className="col-12">
+                <div className="col-2  justify-content-center flex-column d-flex">
+                    <img className="rounded-1" src={user.profilePhoto}></img>
+                </div>
+
+                <div className="col-10  text-center align-items-center  d-flex">
+                    <div className="col-2 mx-2">
+
                         <Link to={`/profile/${user._id}`}>{user.firstName} {user.lastName} </Link>&nbsp;
-                        {user.role}<span className="me-1 ms-1">Allow</span>
+                        {user.role} </div>
+                    <div className="col-8 flex-md-row flex-column d-flex">
+                        <span className="me-4 col d-none d-xl-block">Privileges:</span>
                    {/* <Toggle className="me-1 ms-1" label={" Like "} onClick={setUserLike} toggled={like}/>
                     <Toggle className="me-1 ms-1"  label={" Sign in "} onClick={setUserSignIn} toggled={login}/>
                     <Toggle className="me-1 ms-1"  label={" Comment "} onClick={setUserComments} toggled={comment}/>
                     <Toggle  className="me-1 ms-1"  label={" View "} onClick={setUserViews} toggled={view}/>*/}
-                    <label>
+
+                    <label  className="px-1 col ">
+                        <div>
                         <input type="checkbox"  defaultChecked={like} onClick={()=> setUserLike(!like)} />
-                        <span />
-                        <strong>like</strong>
+                        </div>
+                        like
                     </label>
-                    <label>
+
+                    <label className="px-1 col">
+                        <div>
                         <input type="checkbox"  defaultChecked={comment} onClick={()=> setUserComments(!comment)} />
-                        <span />
-                        <strong>comment</strong>
+                        </div>
+                        comment
                     </label>
-                    <label>
+                    <label className="px-1 col">
+                        <div>
                         <input type="checkbox"  defaultChecked={view} onClick={()=> setUserViews(!view)} />
-                        <span />
-                        <strong>view</strong>
+                        </div>
+                        view
                     </label>
-                    <label>
+                    <label className="px-1 col">
+                        <div>
                         <input type="checkbox"  defaultChecked={login} onClick={()=> setUserSignIn(!login)} />
-                        <span />
-                        <strong>login</strong>
+                        </div>
+                        login
                     </label>
+                    </div>
+                    <div className="col-2">
                         <span className="btn btn-primary float-right"
                         onClick={() => deleteUserHandler(user._id)}>Delete</span>
+                    </div>
                 </div>
             </div>
         </li>

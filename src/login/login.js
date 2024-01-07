@@ -8,6 +8,8 @@ import {setSidebar} from "../reducers/sidebar-reducer";
 import {getPrivilege} from "../thunks/privilege-thunk"
 import {createNewUserAction} from "../services/user-action-service.js";
 import {findUserByEmail} from "../services/user-service";
+import yourImage from '../images/web_light_sq_ctn@4x.png';
+
 import axios from "axios";
 
 function LoginScreen() {
@@ -184,7 +186,11 @@ function LoginScreen() {
                                     Login
                                 </button>
 
-                                    <button onClick={() => login()}>Sign in with Google 🚀 </button>
+                                    <button className="btn  btn-primary btn-block"  style={{backgroundImage:`url(${yourImage})`,  backgroundSize: '100% 100%',
+                                        backgroundRepeat: 'no-repeat',
+                                        width: '200px',
+                                        height: '50px', }} onClick={() => login()}> </button>
+
                                 {/*<useGoogleLogin
                                     className="btn btn-light btn-block mt-3"
 

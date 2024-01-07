@@ -13,19 +13,19 @@ const client = new WebSocket('wss://stockmarket-production.onrender.com');
 
 
 
-
-client.onopen = () => {
-    console.log('web socket client connected');
-};
-
-
-
-function onButtonClicked (hello) {
-    client.send(JSON.stringify({
-                                   type:"message",
-                                   msg:hello
-                               }))
-}
+//
+// client.onopen = () => {
+//     console.log('web socket client connected');
+// };
+//
+//
+//
+// function onButtonClicked (hello) {
+//     client.send(JSON.stringify({
+//                                    type:"message",
+//                                    msg:hello
+//                                }))
+// }
 
 const NewsComponent = () => {
 const dispatch = useDispatch()
@@ -55,15 +55,15 @@ const dispatch = useDispatch()
 
 
 
-    client.onmessage = (message) => {
+ /*   client.onmessage = (message) => {
        const  news1=JSON.parse(message.data)
 
        // console.log(  JSON.parse(message.data))
-        /* const dataFromServer = message.map(data => JSON.parse(message.data));
-         console.log('got reply ', dataFromServer )*/
+        /!* const dataFromServer = message.map(data => JSON.parse(message.data));
+         console.log('got reply ', dataFromServer )*!/
         setNews([...news1])
 
-    }
+    }*/
 
 
 
@@ -99,7 +99,7 @@ const dispatch = useDispatch()
                     <span className="font-monospace float-end">Page={currentPage}, Total Pages={totalPage}</span>
                 </div>
             </div>
-            <button className="btn-primary rounded  float-end me-2  btnNews mb-5"  onClick={()=>onButtonClicked("Hey from client")} >SendClient</button>
+            {/*<button className="btn-primary rounded  float-end me-2  btnNews mb-5"  onClick={()=>onButtonClicked("Hey from client")} >SendClient</button>*/}
         </>
 )
 

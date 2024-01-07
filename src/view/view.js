@@ -7,7 +7,7 @@ import CreateView from "./create-view";
 function View() {
     return(
         <>
-            <h4>Views</h4>
+            <h4 className="font-monospace">Views</h4>
 
             <CreateView/>
 

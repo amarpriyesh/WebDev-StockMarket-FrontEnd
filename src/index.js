@@ -10,8 +10,6 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'font-awesome/css/font-awesome.min.css';
 import {useState} from "react";
 
-
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 //Mongoose.connect('mongodb+srv://finalproject:'+process.env.TUITER_PASSWORD+'@final-project.orngt.mongodb.net/tuiter?retryWrites=true&w=majority');
 

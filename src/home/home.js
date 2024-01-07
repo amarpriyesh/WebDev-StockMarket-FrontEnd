@@ -19,7 +19,7 @@ const titleStyle = {
     fontSize: '3.5rem',
     fontWeight: 700,
     marginBottom: '20px',
-    color: '#FFFFFF',
+
 };
 
 const subtitleStyle = {
@@ -34,13 +34,10 @@ const typingContainerStyle = {
     whiteSpace: 'pre-wrap',
     wordWrap: 'break-word',
     width: '55vw',
-    border: '1px solid #ccc',
     padding: '20px 40px',
     borderRadius: '10px',
     marginBottom: '40px',
     justifyContent: 'center',
-    backgroundColor: '#f5f5f5',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
 };
 
 const cursorStyle = {
@@ -144,8 +141,8 @@ const Home = () => {
         `}
             </style>
             <div style={containerStyle}>
-                <h1 style={titleStyle}>$$tockMarketNews</h1>
-                <h2 style={subtitleStyle}>Real-time Stock Market News and Insights</h2>
+                <h1 className="text-black " style={titleStyle}>$tockMarketNews</h1>
+                <h2 className="text-black " style={subtitleStyle}>Real-time Stock Market News and Insights</h2>
                 <div style={typingContainerStyle}>
                     <span>{typedText}</span>
                     <span style={cursorStyle}>|</span>
