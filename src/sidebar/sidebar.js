@@ -31,7 +31,7 @@ const SidebarComponent = () => {
 
     if (sidebar.component === "none" && sidebar.extra==="none") {
 
-        return (<><ViewList/></>)
+        return (<><h4 className="font-monospace">Views</h4><ViewList/></>)
     }
 else if (sidebar.component === "news"){
         return( <HighlightComponent/>)

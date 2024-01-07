@@ -30,6 +30,7 @@ const client = new WebSocket('wss://stockmarket-production.onrender.com');
 const NewsComponent = () => {
 const dispatch = useDispatch()
     const [news, setNews] =useState([])
+    const [loading, setLoading] = useState(false)
     const [currentPage, setCurrentPage] =useState(1)
     const [totalPage, setTotalPage] =useState([])
     const [pattern,setPattern] = useState(null)
@@ -38,16 +39,29 @@ const dispatch = useDispatch()
 
         setTotalPage(response.totalPage)
     })
-    useEffect(()=> {findNews(currentPage)
-        dispatch(setSidebar({component:"views",newsid:"none",extra:"news"}))},[])
-    const previous =() =>{
+    useEffect( () => {
+        const fetchData = async () => {
+            setLoading(true);
 
-        findNews(Number(currentPage)-1,pattern)
+            await findNews(currentPage);
+
+            setLoading(false);
+        }
+        fetchData()
+        dispatch(setSidebar({component: "views", newsid: "none", extra: "news"}))
+    }, [])
+    const previous =async () => {
+        setLoading(true)
+
+        await findNews(Number(currentPage) - 1, pattern)
+        setLoading(false)
 
     }
-    const next =() =>{
+    const next =async () => {
+        setLoading(true)
 
-        findNews(Number(currentPage)+1,pattern)
+        await findNews(Number(currentPage) + 1, pattern)
+        setLoading(false)
     }
 
 
@@ -87,9 +101,17 @@ const dispatch = useDispatch()
                 <button className="btn btn-primary rounded ml-2"  onClick={()=>{pattern==null?findNews(1,null):findNews(1,pattern)}}>Search</button>
             </div>
 
+            { loading?(
+                         <div className="loading-container">
+                             <div className="loader"></div>
+                             <h3>Loading....</h3>
+                         </div>
+                     ):
+
             <ul className="list-group">
             {news.map(data => <NewsItem news={data} key={data._id}/>)}
             </ul>
+            }
             <div className="row">
                 <div className="col-6">
                 <button className="btn-primary rounded  float-end me-2  btnNews mb-5" disabled={currentPage==1} onClick={()=>previous()} >Previous</button>

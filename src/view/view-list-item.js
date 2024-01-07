@@ -43,14 +43,14 @@ const ViewListItem = ({view, key, findAllViews}) => {
                         {/*<span className="wd-author"> - {moment(view.datePosted).format('MMMM Do, YYYY') }</span>*/}
                         <span className="wd-author "> - {moment(view.datePosted).fromNow() }</span>
                     </div>
-                    <div className="ps-1">
-                        <span className="wd-view-title"> {view.title}</span>
+                    <div className="ps-1 ">
+                        <span className="text-black"> {view.title}</span>
                     </div>
                 </div>
 
                 <div className="col-1">
                     {currentUser && currentUser._id === view.userId &&
-                    <i onClick={() => deleteViewHandler(view._id)} className="fas fa-remove  fa-pull-right"></i>
+                    <i onClick={() => deleteViewHandler(view._id)} className="fas fa-remove fa-pull-right"></i>
                     }
                 </div>
 
@@ -58,7 +58,7 @@ const ViewListItem = ({view, key, findAllViews}) => {
 
             <div className="card mt-4" width="100%">
                 <div className="card-body">
-                    <p className="card-text wd-topic">{view.view}</p>
+                    <p className="card-text wd-topic text-black fs-7 wd-font-size">{view.view}</p>
                 </div>
             </div>
 

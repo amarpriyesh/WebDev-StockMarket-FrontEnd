@@ -151,8 +151,10 @@ function LoginScreen() {
         }
     };
     return (
+        <div>
+        <h4 className="font-monospace">Login Page</h4>
         <div className="container">
-            <div className="row justify-content-center mt-5">
+            <div className="row justify-content-center mt-3">
                 {/*<div className="col-md-6 col-lg-4">*/}
                 <div className="col-10">
                     <div className="card shadow">
@@ -211,6 +213,7 @@ function LoginScreen() {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     );
 }

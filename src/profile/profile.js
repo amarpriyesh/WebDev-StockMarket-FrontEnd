@@ -38,54 +38,52 @@ function Profile() {
         <div className="font-monospace">
             <h4>Profile</h4>
             <div className="row  profile-container">
-            <div className="flex-row d-flex justify-content-between">
-                <div>
-                <h5>Personal Information</h5>
+                <div className="flex-row d-flex justify-content-between">
+                    <div>
+                        <h5>Personal Information</h5>
+                    </div>
+                    <div className="gap-1 d-flex">
+                        <button onClick={() => {
+                            dispatch(logoutThunk());
+                            navigate("/login")
+                        }} className="btn btn-primary">
+                            Logout
+                        </button>
+                        <button onClick={() => {
+                            //dispatch(logoutThunk());
+                            navigate("/editProfile")
+                        }} className=" btn btn-primary ">
+                            Edit Profile
+                        </button>
+                    </div>
                 </div>
-                <div className="gap-1 d-flex" >
-                <button onClick={() => {
-                    dispatch(logoutThunk());
-                    navigate("/login")
-                }} className="btn btn-primary">
-                    Logout
-                </button>
-                <button onClick={() => {
-                    //dispatch(logoutThunk());
-                    navigate("/editProfile")
-                }} className=" btn btn-primary ">
-                    Edit Profile
-                </button>
-                </div>
-            </div>
 
 
-
-
-                    {profile && (
-                        <div className=" my-4">
-                            <div className="row">
-                                <div className="col-md-4">
-                                    {profile.profilePhoto && (
-                                        <img src={profile.profilePhoto}
-                                             alt={`${profile.firstName} ${profile.lastName}`}
-                                             className="profile-image"/>
-                                    )}
-                                </div>
-                                <div className="col-md-8">
-                                    <h2>{`${profile.firstName} ${profile.lastName}`}</h2>
-                                    <p className="profile-username"><i
-                                        className="fas fa-user mr-2"></i>{profile.username}</p>
-                                    <p className="profile-email"><i
-                                        className="fas fa-envelope mr-2"></i>{profile.email}</p>
-                                    <p className="profile-role"><i
-                                        className="fas fa-user-tag mr-2"></i>{profile.role}</p>
-                                    <p className="profile-age"><i
-                                        className="far fa-user-circle mr-2"></i>{profile.age}</p>
-                                </div>
+                {profile && (
+                    <div className=" my-4">
+                        <div className="row">
+                            <div className="col-md-3">
+                                {profile.profilePhoto && (
+                                    <img src={profile.profilePhoto} style={{height:"150px", width:"150px"}}
+                                         alt={`${profile.firstName} ${profile.lastName}`}
+                                         className="profile-image"/>
+                                )}
+                            </div>
+                            <div className="col-md-9">
+                                <h2>{`${profile.firstName} ${profile.lastName}`}</h2>
+                                <p className="profile-username"><i
+                                    className="fas fa-user mr-2"></i>{profile.username}</p>
+                                <p className="profile-email"><i
+                                    className="fas fa-envelope mr-2"></i>{profile.email}</p>
+                                <p className="profile-role"><i
+                                    className="fas fa-user-tag mr-2"></i>{profile.role}</p>
+                                <p className="profile-age"><i
+                                    className="far fa-user-circle mr-2"></i>{profile.age}</p>
                             </div>
                         </div>
-                    )}
-                </div>
+                    </div>
+                )}
+            </div>
 
             {currentUser && currentUser.role === "ADMIN" && (
                 <div className="mt-3 me-3">
